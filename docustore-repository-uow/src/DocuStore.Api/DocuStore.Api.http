@@ -1,0 +1,6 @@
+@DocuStore.Api_HostAddress = http://localhost:5049
+
+GET http://localhost:5049/weatherforecast/
+Accept: application/json
+
+###

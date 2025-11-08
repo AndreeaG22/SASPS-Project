@@ -1,0 +1,6 @@
+@DocuStore.AR.API_HostAddress = http://localhost:5197
+
+GET {{DocuStore.AR.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

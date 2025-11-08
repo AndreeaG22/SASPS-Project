@@ -17,3 +17,12 @@ Aplicația **DocuStore** implementează un API backend pentru gestionarea docume
 Se compară două variante:
 - **A. Active Record** – logica de persistență inclusă în model (`document.Save()`).
 - **B. Repository + Unit of Work** – separare clară între business logic și acces la date.
+
+---
+
+### Rulare proiect
+
+```
+dotnet run --project docustore-activerecord/src/DocuStore.AR.API/DocuStore.AR.API.csproj
+dotnet run --project docustore-repository-uow/src/DocuStore.Api/DocuStore.Api.csproj
+```

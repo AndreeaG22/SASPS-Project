@@ -1,6 +1,0 @@
-@Versioning.API_HostAddress = http://localhost:5085
-
-GET {{Versioning.API_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

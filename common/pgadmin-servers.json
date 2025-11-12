@@ -1,0 +1,26 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "DocuStore ActiveRecord DB",
+      "Group": "DocuStore",
+      "Host": "postgres-activerecord",
+      "Port": 5432,
+      "MaintenanceDB": "docustore_ar_db",
+      "Username": "docustore_ar",
+      "Password": "dev_password_ar",
+      "SSLMode": "prefer",
+      "Comment": "Active Record Pattern Database"
+    },
+    "2": {
+      "Name": "DocuStore Repository DB",
+      "Group": "DocuStore",
+      "Host": "postgres-repository",
+      "Port": 5432,
+      "Username": "docustore_repo",
+      "Password": "dev_password_repo",
+      "MaintenanceDB": "docustore_repo_db",
+      "SSLMode": "prefer",
+      "Comment": "Repository + UoW Pattern Database"
+    }
+  }
+}

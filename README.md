@@ -11,7 +11,7 @@ Aplicația **DocuStore** implementează un API backend pentru gestionarea docume
 - etichete (tags)
 - listare / căutare
 
-**Stack:** .NET 9 · PostgreSQL · Docker Compose  
+**Stack:** .NET 10 · PostgreSQL · Docker Compose  
 **Testare:** Swagger · Postman · k6 
 
 Se compară două variante:

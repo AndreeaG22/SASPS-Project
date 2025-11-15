@@ -72,13 +72,18 @@ services:
     container_name: docustore-gateway
     environment:
       ASPNETCORE_ENVIRONMENT: "Development"
-      ConnectionStrings__DocuStoreDb: "Host=postgres-activerecord;Port=5432;Database=docustore_ar_db;Username=docustore_ar;Password=dev_password_ar;SearchPath=public"
+      ASPNETCORE_URLS: "http://+:8080"
+      ConnectionStrings__DocuStoreDb: "Host=postgres-activerecord;Port=5432;Database=docustore_ar_db;Username=docustore_ar;Password=dev_password_ar;SearchPath=document"
     depends_on:
-      - postgres-activerecord
+      postgres-activerecord:
+        condition: service_healthy
     ports:
       - "8080:8080"
     networks:
       - docustore-network
+    restart: unless-stopped
+    volumes:
+      - document_storage:/app/DocumentStorage
 
 
 # Named volumes (persistent storage)
@@ -89,6 +94,8 @@ volumes:
     name: docustore_repo_data
   pgadmin_data:
     name: docustore_pgadmin_data
+  document_storage:
+    name: docustore_document_storage
 
 networks:
   docustore-network:

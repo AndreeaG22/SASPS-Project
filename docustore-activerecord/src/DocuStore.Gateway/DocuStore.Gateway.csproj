@@ -5,11 +5,13 @@
     <ProjectReference Include="..\Versioning\Versioning.API\Versioning.API.csproj" />
     <ProjectReference Include="..\Tagging\Tagging.API\Tagging.API.csproj" />
     <ProjectReference Include="..\MetadataIndexing\MetadataIndexing.API\MetadataIndexing.API.csproj" />
+    <ProjectReference Include="..\Document\Document.Infrastructure\Document.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.0" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -1,25 +1,57 @@
+using Document.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Document.Infrastructure.Data;
 
 public class DocumentDbContext(DbContextOptions<DocumentDbContext> options) : DbContext(options)
 {
-    // Add your DbSets here when you create entities
-    // public DbSet<DocumentEntity> Documents { get; set; }
+    public DbSet<DocumentEntity> Documents { get; set; } = null!;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
         
-        // Set default schema for this module
         modelBuilder.HasDefaultSchema("document");
+
+        // Configure DocumentEntity
+        modelBuilder.Entity<DocumentEntity>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            
+            entity.Property(e => e.Title)
+                .IsRequired()
+                .HasMaxLength(200);
+            
+            entity.Property(e => e.Description)
+                .HasMaxLength(2000);
+            
+            entity.Property(e => e.FileName)
+                .IsRequired()
+                .HasMaxLength(255);
+            
+            entity.Property(e => e.FilePathOnDisk)
+                .IsRequired()
+                .HasMaxLength(500);
+            
+            entity.Property(e => e.ContentType)
+                .IsRequired()
+                .HasMaxLength(100);
+            
+            entity.Property(e => e.CreatedBy)
+                .IsRequired()
+                .HasMaxLength(100);
+            
+            entity.Property(e => e.UpdatedBy)
+                .HasMaxLength(100);
+
+            entity.HasIndex(e => e.CreatedAt);
+            entity.HasIndex(e => e.Title);
+        });
     }
     
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         base.OnConfiguring(optionsBuilder);
-        
-        // Configure migrations history table to use the document schema
         optionsBuilder.UseNpgsql(o => o.MigrationsHistoryTable("__EFMigrationsHistory", "document"));
     }
 }

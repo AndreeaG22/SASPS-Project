@@ -15,7 +15,7 @@ services:
     volumes:
       - postgres_ar_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U docustore_ar -d docustore_ar_db"]
+      test: [ "CMD-SHELL", "pg_isready -U docustore_ar -d docustore_ar_db" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -37,7 +37,7 @@ services:
     volumes:
       - postgres_repo_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U docustore_repo -d docustore_repo_db"]
+      test: [ "CMD-SHELL", "pg_isready -U docustore_repo -d docustore_repo_db" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -64,6 +64,22 @@ services:
     restart: unless-stopped
     networks:
       - docustore-network
+  
+  docustore-gateway:
+    build:
+      context: ./docustore-activerecord
+      dockerfile: ./Dockerfile
+    container_name: docustore-gateway
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+      ConnectionStrings__DocuStoreDb: "Host=postgres-activerecord;Port=5432;Database=docustore_ar_db;Username=docustore_ar;Password=dev_password_ar;SearchPath=public"
+    depends_on:
+      - postgres-activerecord
+    ports:
+      - "8080:8080"
+    networks:
+      - docustore-network
+
 
 # Named volumes (persistent storage)
 volumes:

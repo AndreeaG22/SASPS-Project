@@ -1,13 +1,11 @@
-using Microsoft.AspNetCore.OpenApi; // pentru .WithOpenApi()
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(); // simplu, fără OpenApiInfo explicit
+builder.Services.AddSwaggerGen();
 
-// CORS pentru front-end (dacă e nevoie)
+// CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
@@ -26,7 +24,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(options =>
     {
         options.SwaggerEndpoint("/swagger/v1/swagger.json", "DocuStore API v1");
-        options.RoutePrefix = string.Empty; 
+        options.RoutePrefix = string.Empty;
         options.DocumentTitle = "DocuStore API Documentation";
     });
 }
@@ -42,8 +40,7 @@ app.MapGet("/health", () => Results.Ok(new
         timestamp = DateTime.UtcNow,
         modules = new[] { "Document", "Versioning", "Tagging", "MetadataIndexing" }
     }))
-    .WithTags("Health")
-    .WithOpenApi();
+    .WithTags("Health");
 
 app.MapGet("/", () => Results.Ok(new
     {
@@ -52,7 +49,6 @@ app.MapGet("/", () => Results.Ok(new
         health = "/health",
         version = "1.0.0"
     }))
-    .WithTags("Gateway")
-    .WithOpenApi();
+    .WithTags("Gateway");
 
 app.Run();

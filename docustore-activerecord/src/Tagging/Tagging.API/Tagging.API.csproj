@@ -19,4 +19,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Update="appsettings.json;appsettings.Development.json">
+      <!-- La build local rămân OK, dar NU se mai copiază la publish
+           când acest proiect e doar dependency pentru altul -->
+      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

@@ -1,6 +1,7 @@
 ﻿using Document.API.Models;
 using Document.Application.Commands;
 using Document.Application.Commands.CreateDocument;
+using Document.Application.Queries.GetDocument;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +22,14 @@ public static class DocumentEndpoints
             .WithName("CreateDocument")
             .WithSummary("Create a new document")
             .WithDescription("Upload a new document with title, description, and file");
+        
+        group.MapGet("/{id:guid}", GetDocument)
+            .Produces<DocumentResponse>(StatusCodes.Status200OK)
+            .Produces<ErrorResponse>(StatusCodes.Status404NotFound)
+            .WithName("GetDocument")
+            .WithSummary("Get document details")
+            .WithDescription("Retrieve complete information about a specific document by its ID");
+
 
         return endpoints;
     }
@@ -46,7 +55,7 @@ public static class DocumentEndpoints
                 FileName: file.FileName,
                 FileContent: fileContent,
                 ContentType: file.ContentType,
-                UserId: "system" // TODO: Get from authentication context
+                UserId: "system" 
             );
 
             // Execute command
@@ -79,6 +88,48 @@ public static class DocumentEndpoints
                 detail: ex.Message,
                 statusCode: StatusCodes.Status500InternalServerError,
                 title: "An error occurred while creating the document"
+            );
+        }
+    }
+    
+    
+    private static async Task<IResult> GetDocument(
+        Guid id,
+        [FromServices] IMediator mediator,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            var query = new GetDocumentQuery(id);
+            var result = await mediator.Send(query, cancellationToken);
+
+            if (result == null)
+            {
+                return Results.NotFound(new ErrorResponse(
+                    Message: $"Document with ID '{id}' not found",
+                    StatusCode: StatusCodes.Status404NotFound
+                ));
+            }
+
+            var response = new DocumentResponse(
+                Id: result.Id,
+                Title: result.Title,
+                Description: result.Description,
+                FileName: result.FileName,
+                FileSizeInBytes: result.FileSizeInBytes,
+                ContentType: result.ContentType,
+                CreatedAt: result.CreatedAt,
+                CreatedBy: result.CreatedBy
+            );
+
+            return Results.Ok(response);
+        }
+        catch (Exception ex)
+        {
+            return Results.Problem(
+                detail: ex.Message,
+                statusCode: StatusCodes.Status500InternalServerError,
+                title: "An error occurred while retrieving the document"
             );
         }
     }

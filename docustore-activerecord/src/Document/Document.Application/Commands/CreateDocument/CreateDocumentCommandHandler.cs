@@ -1,7 +1,6 @@
 ﻿using Document.Application.DTOs;
 using Document.Domain.Entities;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Document.Application.Commands.CreateDocument;
 
@@ -9,7 +8,6 @@ public class CreateDocumentCommandHandler : IRequestHandler<CreateDocumentComman
 {
     public async Task<DocumentDto> Handle(CreateDocumentCommand request, CancellationToken cancellationToken)
     {
-        // 1. Create document entity (factory method with validation)
         var document = DocumentEntity.Create(
             title: request.Title,
             description: request.Description,
@@ -18,10 +16,8 @@ public class CreateDocumentCommandHandler : IRequestHandler<CreateDocumentComman
             createdBy: request.UserId
         );
 
-        // 2. Entity handles file upload AND database save
         await document.UploadAndSave(request.FileContent, cancellationToken);
 
-        // 3. Map to DTO and return
         return new DocumentDto(
             Id: document.Id,
             Title: document.Title,

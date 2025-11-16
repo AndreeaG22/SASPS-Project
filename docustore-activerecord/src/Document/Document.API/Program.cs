@@ -15,6 +15,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDocumentApplication();
 builder.Services.AddDocumentInfrastructure(builder.Configuration);
 
+builder.Services.AddMediatR(cfg => cfg.LicenseKey = builder.Configuration.GetConnectionString("MediatRLicenseKey"));
+
 // CORS
 builder.Services.AddCors(options =>
 {
@@ -42,7 +44,7 @@ app.UseCors("AllowAll");
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
-app.MapDocumentEndpoints(); // Map minimal API endpoints
+app.MapDocumentEndpoints(); 
 
 app.MapGet("/health", () => Results.Ok(new
     {

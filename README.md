@@ -23,6 +23,10 @@ Se compară două variante:
 ### Rulare proiect
 
 ```
-dotnet run --project docustore-activerecord/src/DocuStore.AR.API/DocuStore.AR.API.csproj
-dotnet run --project docustore-repository-uow/src/DocuStore.Api/DocuStore.Api.csproj
+docker-compose up -d
+```
+
+### Update container pentru incarcarea schimbarilor
+```
+docker-compose up --build docustore-gateway
 ```

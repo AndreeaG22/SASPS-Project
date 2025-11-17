@@ -1,4 +1,5 @@
 using Document.Domain.Entities;
+using Document.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace Document.Infrastructure.Data;
@@ -44,8 +45,17 @@ public class DocumentDbContext(DbContextOptions<DocumentDbContext> options) : Db
             entity.Property(e => e.UpdatedBy)
                 .HasMaxLength(100);
 
+            entity.Property(e => e.Status)
+                .IsRequired()
+                .HasConversion<int>()
+                .HasDefaultValue(DocumentStatus.Active);
+
+            entity.Property(e => e.DeletedBy)
+                .HasMaxLength(100);
+
             entity.HasIndex(e => e.CreatedAt);
             entity.HasIndex(e => e.Title);
+            entity.HasIndex(e => e.Status);
         });
     }
     

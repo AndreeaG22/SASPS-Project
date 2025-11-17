@@ -23,7 +23,8 @@ public class ListDocumentsQueryHandler : IRequestHandler<ListDocumentsQuery, Lis
             FileSizeInBytes: document.FileSizeInBytes,
             ContentType: document.ContentType,
             CreatedAt: document.CreatedAt,
-            CreatedBy: document.CreatedBy
+            CreatedBy: document.CreatedBy,
+            Status: document.Status
         )).ToList();
         
         return new ListDocumentsResult(documentDtos, documentDtos.Count);

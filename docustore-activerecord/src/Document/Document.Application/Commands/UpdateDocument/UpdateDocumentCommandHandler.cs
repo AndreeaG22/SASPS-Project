@@ -2,16 +2,20 @@
 using Document.Domain.Entities;
 using MediatR;
 
-namespace Document.Application.Queries.GetDocument;
+namespace Document.Application.Commands.UpdateDocument;
 
-public class GetDocumentQueryHandler : IRequestHandler<GetDocumentQuery, DocumentDto?>
+public class UpdateDocumentCommandHandler : IRequestHandler<UpdateDocumentCommand, DocumentDto> // aici prima entitate este ce intra si a doua e ce iese. cand facem .send() in API o sa ajunga aici 
 {
-    public async Task<DocumentDto?> Handle(GetDocumentQuery request, CancellationToken cancellationToken)
+    public async Task<DocumentDto> Handle(UpdateDocumentCommand request, CancellationToken cancellationToken)
     {
         var document = await DocumentEntity.Find(request.Id, cancellationToken);
 
         if (document == null)
-            return null;
+        {
+            throw new InvalidOperationException($"Document with ID '{request.Id}' not found");
+        }
+
+        await document.Update(request.Title, request.Description, request.UserId, cancellationToken);
 
         return new DocumentDto(
             Id: document.Id,

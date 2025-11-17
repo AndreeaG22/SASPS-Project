@@ -8,5 +8,8 @@ public record DocumentResponse(
     long FileSizeInBytes,
     string ContentType,
     DateTime CreatedAt,
-    string CreatedBy
+    string CreatedBy,
+    string Status,
+    DateTime? DeletedAt = null,
+    string? DeletedBy = null
 );

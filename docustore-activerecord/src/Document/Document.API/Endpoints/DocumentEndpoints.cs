@@ -1,6 +1,8 @@
 ﻿using Document.API.Models;
 using Document.Application.Commands;
 using Document.Application.Commands.CreateDocument;
+using Document.Application.Commands.DeleteDocument;
+using Document.Application.Commands.UpdateDocument;
 using Document.Application.Queries.GetDocument;
 using Document.Application.Queries.ListDocuments;
 using MediatR;
@@ -37,6 +39,22 @@ public static class DocumentEndpoints
             .WithName("GetAllDocuments")
             .WithSummary("Get all documents")
             .WithDescription("Retrieve a list of all documents");
+        
+        group.MapPut("/{id:guid}", UpdateDocument)
+            .Produces<DocumentResponse>(StatusCodes.Status200OK)
+            .Produces<ErrorResponse>(StatusCodes.Status404NotFound)
+            .Produces<ErrorResponse>(StatusCodes.Status400BadRequest)
+            .WithName("UpdateDocument")
+            .WithSummary("Update document metadata")
+            .WithDescription("Update the title and description of an existing document. File content remains unchanged.");
+
+        group.MapDelete("/{id:guid}", DeleteDocument)
+            .Produces<DeleteDocumentResponse>(StatusCodes.Status200OK)
+            .Produces<ErrorResponse>(StatusCodes.Status404NotFound)
+            .Produces<ErrorResponse>(StatusCodes.Status400BadRequest)
+            .WithName("DeleteDocument")
+            .WithSummary("Soft delete a document")
+            .WithDescription("Mark a document as deleted. The document will no longer appear in normal lists but can still be retrieved by ID for audit purposes.");
 
         return endpoints;
     }
@@ -60,7 +78,8 @@ public static class DocumentEndpoints
                             FileSizeInBytes: doc.FileSizeInBytes,
                             ContentType: doc.ContentType,
                             CreatedAt: doc.CreatedAt,
-                            CreatedBy: doc.CreatedBy
+                            CreatedBy: doc.CreatedBy,
+                            Status: doc.Status.ToString()
                         )
                     )
                     .ToList(),
@@ -120,7 +139,8 @@ public static class DocumentEndpoints
                 FileSizeInBytes: result.FileSizeInBytes,
                 ContentType: result.ContentType,
                 CreatedAt: result.CreatedAt,
-                CreatedBy: result.CreatedBy
+                CreatedBy: result.CreatedBy,
+                Status: result.Status.ToString()
             );
 
             return Results.Created($"/api/documents/{response.Id}", response);
@@ -169,7 +189,8 @@ public static class DocumentEndpoints
                 FileSizeInBytes: result.FileSizeInBytes,
                 ContentType: result.ContentType,
                 CreatedAt: result.CreatedAt,
-                CreatedBy: result.CreatedBy
+                CreatedBy: result.CreatedBy,
+                Status: result.Status.ToString()
             );
 
             return Results.Ok(response);
@@ -180,6 +201,107 @@ public static class DocumentEndpoints
                 detail: ex.Message,
                 statusCode: StatusCodes.Status500InternalServerError,
                 title: "An error occurred while retrieving the document"
+            );
+        }
+    }
+    
+    private static async Task<IResult> UpdateDocument(
+        Guid id,
+        [FromBody] UpdateDocumentRequest request,
+        [FromServices] IMediator mediator,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            var command = new UpdateDocumentCommand(
+                Id: id,
+                Title: request.Title,
+                Description: request.Description,
+                UserId: "system"
+            );
+
+            var result = await mediator.Send(command, cancellationToken);
+
+            var response = new DocumentResponse(
+                Id: result.Id,
+                Title: result.Title,
+                Description: result.Description,
+                FileName: result.FileName,
+                FileSizeInBytes: result.FileSizeInBytes,
+                ContentType: result.ContentType,
+                CreatedAt: result.CreatedAt,
+                CreatedBy: result.CreatedBy,
+                Status: result.Status.ToString()
+            );
+
+            return Results.Ok(response);
+        }
+        catch (InvalidOperationException ex) when (ex.Message.Contains("not found"))
+        {
+            return Results.NotFound(new ErrorResponse(
+                Message: ex.Message,
+                StatusCode: StatusCodes.Status404NotFound
+            ));
+        }
+        catch (InvalidOperationException ex)
+        {
+            return Results.BadRequest(new ErrorResponse(
+                Message: ex.Message,
+                StatusCode: StatusCodes.Status400BadRequest
+            ));
+        }
+        catch (Exception ex)
+        {
+            return Results.Problem(
+                detail: ex.Message,
+                statusCode: StatusCodes.Status500InternalServerError,
+                title: "An error occurred while updating the document"
+            );
+        }
+    }
+    
+    private static async Task<IResult> DeleteDocument(
+        Guid id,
+        [FromServices] IMediator mediator,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            var command = new DeleteDocumentCommand(
+                Id: id,
+                UserId: "system"
+            );
+
+            await mediator.Send(command, cancellationToken);
+
+            var response = new DeleteDocumentResponse(
+                Id: id,
+                Message: "Document successfully deleted",
+                DeletedAt: DateTime.UtcNow
+            );
+
+            return Results.Ok(response);
+        }
+        catch (InvalidOperationException ex) when (ex.Message.Contains("not found"))
+        {
+            return Results.NotFound(new ErrorResponse(
+                Message: ex.Message,
+                StatusCode: StatusCodes.Status404NotFound
+            ));
+        }
+        catch (InvalidOperationException ex) when (ex.Message.Contains("already deleted"))
+        {
+            return Results.BadRequest(new ErrorResponse(
+                Message: ex.Message,
+                StatusCode: StatusCodes.Status400BadRequest
+            ));
+        }
+        catch (Exception ex)
+        {
+            return Results.Problem(
+                detail: ex.Message,
+                statusCode: StatusCodes.Status500InternalServerError,
+                title: "An error occurred while deleting the document"
             );
         }
     }

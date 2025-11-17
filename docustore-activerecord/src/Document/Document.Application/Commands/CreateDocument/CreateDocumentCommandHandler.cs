@@ -26,7 +26,8 @@ public class CreateDocumentCommandHandler : IRequestHandler<CreateDocumentComman
             FileSizeInBytes: document.FileSizeInBytes,
             ContentType: document.ContentType,
             CreatedAt: document.CreatedAt,
-            CreatedBy: document.CreatedBy
+            CreatedBy: document.CreatedBy,
+            Status: document.Status
         );
     }
 }

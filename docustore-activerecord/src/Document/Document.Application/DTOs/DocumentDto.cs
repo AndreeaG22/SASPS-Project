@@ -1,4 +1,6 @@
-﻿namespace Document.Application.DTOs;
+﻿using Document.Domain.Enums;
+
+namespace Document.Application.DTOs;
 
 public record DocumentDto(
     Guid Id,
@@ -8,5 +10,6 @@ public record DocumentDto(
     long FileSizeInBytes,
     string ContentType,
     DateTime CreatedAt,
-    string CreatedBy
+    string CreatedBy,
+    DocumentStatus Status
 );

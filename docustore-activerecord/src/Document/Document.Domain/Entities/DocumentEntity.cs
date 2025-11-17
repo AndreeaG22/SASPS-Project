@@ -1,4 +1,5 @@
 ﻿using Document.Domain.Common;
+using Document.Domain.Enums;
 using Document.Domain.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,10 @@ public class DocumentEntity : ActiveRecordBase
     public string FilePathOnDisk { get; private set; } = string.Empty;
     public long FileSizeInBytes { get; private set; }
     public string ContentType { get; private set; } = string.Empty;
+    public DocumentStatus Status { get; private set; } = DocumentStatus.Active; // am adadaugat status
+    public DateTime? DeletedAt { get; private set; }
+    public string? DeletedBy { get; private set; }
+    
 
     // EF Core requires a parameterless constructor
     private DocumentEntity() { }
@@ -40,7 +45,8 @@ public class DocumentEntity : ActiveRecordBase
             Title = title,
             Description = description,
             FileName = fileName,
-            ContentType = contentType
+            ContentType = contentType,
+            Status = DocumentStatus.Active
         };
 
         document.SetCreatedBy(createdBy);
@@ -109,8 +115,38 @@ public class DocumentEntity : ActiveRecordBase
 
         await Save(cancellationToken);
     }
+    
+    public async Task SoftDelete(string deletedBy, CancellationToken cancellationToken = default)
+    { 
+        if (Status == DocumentStatus.Deleted)
+        {
+            throw new InvalidOperationException("Document is already deleted");
+        }
+        
+        Status = DocumentStatus.Deleted;
+        DeletedAt = DateTime.UtcNow;
+        DeletedBy = deletedBy;
+        SetUpdatedBy(deletedBy);
 
-    public async Task Delete(CancellationToken cancellationToken = default)
+        await Save(cancellationToken);
+    }
+    
+    public async Task Restore(string restoredBy, CancellationToken cancellationToken = default)
+    {
+        if (Status != DocumentStatus.Deleted)
+        {
+            throw new InvalidOperationException("Only deleted documents can be restored");
+        }
+
+        Status = DocumentStatus.Active;
+        DeletedAt = null;
+        DeletedBy = null;
+        SetUpdatedBy(restoredBy);
+
+        await Save(cancellationToken);
+    }
+
+    public async Task HardDelete(CancellationToken cancellationToken = default)
     {
         var context = GetDbContext();
 
@@ -146,6 +182,15 @@ public class DocumentEntity : ActiveRecordBase
     {
         var context = GetDbContext();
         return await context.Set<DocumentEntity>()
+            .Where(d => d.Status == DocumentStatus.Active)
+            .OrderByDescending(d => d.CreatedAt)
+            .ToListAsync(cancellationToken);
+    }
+
+    public static async Task<List<DocumentEntity>> AllIncludingDeleted(CancellationToken cancellationToken = default)
+    {
+        var context = GetDbContext();
+        return await context.Set<DocumentEntity>()
             .OrderByDescending(d => d.CreatedAt)
             .ToListAsync(cancellationToken);
     }
@@ -155,14 +200,17 @@ public class DocumentEntity : ActiveRecordBase
         CancellationToken cancellationToken = default)
     {
         var context = GetDbContext();
-        var allDocuments = await context.Set<DocumentEntity>().ToListAsync(cancellationToken);
+        var allDocuments = await context.Set<DocumentEntity>()
+            .Where(d => d.Status == DocumentStatus.Active)
+            .ToListAsync(cancellationToken);
         return allDocuments.Where(predicate).ToList();
     }
 
     public static async Task<int> Count(CancellationToken cancellationToken = default)
     {
         var context = GetDbContext();
-        return await context.Set<DocumentEntity>().CountAsync(cancellationToken);
+        return await context.Set<DocumentEntity>()
+            .CountAsync(d => d.Status == DocumentStatus.Active, cancellationToken);
     }
 
     public static async Task<bool> Exists(Guid id, CancellationToken cancellationToken = default)

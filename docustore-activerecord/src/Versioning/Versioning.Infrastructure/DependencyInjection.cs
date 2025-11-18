@@ -2,7 +2,9 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Versioning.Domain.Common;
+using Versioning.Domain.Services;
 using Versioning.Infrastructure.Data;
+using Versioning.Infrastructure.Services;
 
 namespace Versioning.Infrastructure;
 
@@ -20,7 +22,6 @@ public static class DependencyInjection
             contextLifetime: ServiceLifetime.Transient,
             optionsLifetime: ServiceLifetime.Singleton);
 
-        // factory specific pentru Versioning
         services.AddSingleton<VersioningDbContextFactory>(sp =>
         {
             return () =>
@@ -29,6 +30,8 @@ public static class DependencyInjection
                 return scope.ServiceProvider.GetRequiredService<VersioningDbContext>();
             };
         });
+
+        services.AddSingleton<IFileStorageService, FileStorageService>();
 
         return services;
     }

@@ -158,24 +158,11 @@ public class DocumentEntity : ActiveRecordBase
         context.Set<DocumentEntity>().Remove(this);
         await context.SaveChangesAsync(cancellationToken);
     }
-
-    public async Task Reload(CancellationToken cancellationToken = default)
-    {
-        var context = GetDbContext();
-        await context.Entry(this).ReloadAsync(cancellationToken);
-    }
-
+    
     public static async Task<DocumentEntity?> Find(Guid id, CancellationToken cancellationToken = default)
     {
         var context = GetDbContext();
         return await context.Set<DocumentEntity>().FindAsync(new object[] { id }, cancellationToken);
-    }
-
-    public static async Task<DocumentEntity?> FindByTitle(string title, CancellationToken cancellationToken = default)
-    {
-        var context = GetDbContext();
-        return await context.Set<DocumentEntity>()
-            .FirstOrDefaultAsync(d => d.Title == title, cancellationToken);
     }
 
     public static async Task<List<DocumentEntity>> All(CancellationToken cancellationToken = default)

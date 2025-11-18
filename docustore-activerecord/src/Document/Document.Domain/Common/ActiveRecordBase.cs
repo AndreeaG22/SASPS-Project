@@ -9,18 +9,12 @@ public abstract class ActiveRecordBase
     public string CreatedBy { get; protected set; } = string.Empty;
     public DateTime? UpdatedAt { get; protected set; }
     public string? UpdatedBy { get; protected set; }
-
-    /// <summary>
-    /// Gets the DbContext from the provider
-    /// </summary>
+    
     protected static DbContext GetDbContext()
     {
         return DocumentDbContextProvider.GetContext();
     }
-
-    /// <summary>
-    /// Gets a scoped service from service locator
-    /// </summary>
+    
     protected static T GetService<T>() where T : notnull
     {
         return ServiceLocator.GetService<T>();

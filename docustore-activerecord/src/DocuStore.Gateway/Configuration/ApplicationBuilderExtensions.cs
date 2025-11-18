@@ -1,4 +1,5 @@
 ﻿using Document.API.Endpoints;
+using Versioning.API.Endpoints;
 
 namespace DocuStore.Gateway.Configuration;
 
@@ -29,6 +30,7 @@ public static class ApplicationBuilderExtensions
 
         // Map module endpoints
         app.MapDocumentEndpoints();
+        app.MapVersionEndpoints();  
 
         // Map health and info endpoints
         app.MapHealthEndpoints();

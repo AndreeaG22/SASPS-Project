@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="Shared\Shared.csproj" Type="Classic C#" />
     <Project Path="src/DocuStore.Gateway/DocuStore.Gateway.csproj" />
   </Folder>
   <Folder Name="/src/Document/">

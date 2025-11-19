@@ -7,6 +7,7 @@ using Document.Application.Queries.GetDocument;
 using Document.Application.Queries.ListDocuments;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Shared.Models;
 
 namespace Document.API.Endpoints;
 

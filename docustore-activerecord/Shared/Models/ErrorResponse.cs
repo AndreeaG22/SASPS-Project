@@ -1,4 +1,4 @@
-﻿namespace Document.API.Models;
+﻿namespace Shared.Models;
 
 public record ErrorResponse(
     string Message,

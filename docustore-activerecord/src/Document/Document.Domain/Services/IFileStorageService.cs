@@ -2,7 +2,11 @@
 
 public interface IFileStorageService
 {
-    Task<string> SaveFileAsync(byte[] fileContent, string fileName, CancellationToken cancellationToken = default);
-    Task<byte[]> GetFileAsync(string filePath, CancellationToken cancellationToken = default);
-    Task DeleteFileAsync(string filePath, CancellationToken cancellationToken = default);
+    Task<string> CreateDocumentFolderAsync(Guid documentId, string fileName, CancellationToken cancellationToken = default);
+    Task<string> SaveVersionFileAsync(Guid documentId, byte[] fileContent, int versionNumber, CancellationToken cancellationToken = default);
+    Task<byte[]> GetVersionFileAsync(Guid documentId, int versionNumber, CancellationToken cancellationToken = default);
+    Task<byte[]> GetCurrentVersionFileAsync(Guid documentId, CancellationToken cancellationToken = default);
+    Task DeleteDocumentFolderAsync(Guid documentId, CancellationToken cancellationToken = default);
+    Task UpdateCurrentVersionMarkerAsync(Guid documentId, int versionNumber, CancellationToken cancellationToken = default);
+    Task<int?> GetCurrentVersionNumberAsync(Guid documentId, CancellationToken cancellationToken = default);
 }

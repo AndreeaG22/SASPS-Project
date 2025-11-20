@@ -18,7 +18,9 @@ public class VersionEntity : ActiveRecordBase<VersionEntity>
     public bool IsCurrent { get; private set; }
 
     // EF Core requires a parameterless constructor
-    private VersionEntity() { }
+    private VersionEntity()
+    {
+    }
 
     public static async Task<VersionEntity> Create(
         Guid documentId,
@@ -41,7 +43,8 @@ public class VersionEntity : ActiveRecordBase<VersionEntity>
         // Check if document exists and is not deleted
         var documentExists = await CheckDocumentExists(documentId, cancellationToken);
         if (!documentExists)
-            throw new InvalidOperationException($"Cannot add version. Document with ID '{documentId}' not found or is deleted");
+            throw new InvalidOperationException(
+                $"Cannot add version. Document with ID '{documentId}' not found or is deleted");
 
         var nextVersionNumber = await GetNextVersionNumber(documentId, cancellationToken);
 
@@ -69,9 +72,10 @@ public class VersionEntity : ActiveRecordBase<VersionEntity>
 
         var fileStorageService = GetService<IFileStorageService>();
 
-        FilePathOnDisk = await fileStorageService.SaveFileAsync(
+        FilePathOnDisk = await fileStorageService.SaveVersionFileAsync(
+            DocumentId,
             fileContent,
-            FileName,
+            VersionNumber,
             cancellationToken);
 
         FileSizeInBytes = fileContent.Length;
@@ -79,6 +83,11 @@ public class VersionEntity : ActiveRecordBase<VersionEntity>
         await MarkOtherVersionsAsNotCurrent(cancellationToken);
 
         await Save(cancellationToken);
+
+        await fileStorageService.UpdateCurrentVersionMarkerAsync(
+            DocumentId,
+            VersionNumber,
+            cancellationToken);
     }
 
     private async Task MarkOtherVersionsAsNotCurrent(CancellationToken cancellationToken)
@@ -113,6 +122,23 @@ public class VersionEntity : ActiveRecordBase<VersionEntity>
         await context.SaveChangesAsync(cancellationToken);
     }
 
+    public async Task<byte[]> GetFileContent(CancellationToken cancellationToken = default)
+    {
+        var fileStorageService = GetService<IFileStorageService>();
+        return await fileStorageService.GetVersionFileAsync(DocumentId, VersionNumber, cancellationToken);
+    }
+
+    public static async Task<VersionEntity?> GetVersionByNumber(
+        Guid documentId,
+        int versionNumber,
+        CancellationToken cancellationToken = default)
+    {
+        var context = GetDbContext();
+        return await context.Set<VersionEntity>()
+            .Where(v => v.DocumentId == documentId && v.VersionNumber == versionNumber)
+            .FirstOrDefaultAsync(cancellationToken);
+    }
+
     private static async Task<bool> CheckDocumentExists(Guid documentId, CancellationToken cancellationToken)
     {
         try
@@ -124,6 +150,57 @@ public class VersionEntity : ActiveRecordBase<VersionEntity>
         {
             // If we can't verify, fail safely by not allowing the version
             return false;
+        }
+    }
+
+    public async Task SetAsCurrent(string userId, CancellationToken cancellationToken = default)
+    {
+        // Get the current version first
+        var context = GetDbContext();
+        var currentVersion = await context.Set<VersionEntity>()
+            .Where(v => v.DocumentId == this.DocumentId && v.IsCurrent)
+            .FirstOrDefaultAsync(cancellationToken);
+
+        if (currentVersion?.Id == this.Id)
+        {
+            return;
+        }
+
+        var previousCurrentVersionNumber = currentVersion?.VersionNumber ?? this.VersionNumber;
+
+        var allVersions = await context.Set<VersionEntity>()
+            .Where(v => v.DocumentId == this.DocumentId && v.IsCurrent)
+            .ToListAsync(cancellationToken);
+
+        foreach (var version in allVersions)
+        {
+            version.IsCurrent = false;
+            version.SetUpdatedBy(userId);
+        }
+
+        this.IsCurrent = true;
+        this.SetUpdatedBy(userId);
+
+        await context.SaveChangesAsync(cancellationToken);
+
+        var fileStorageService = GetService<IFileStorageService>();
+        await fileStorageService.UpdateCurrentVersionMarkerAsync(
+            DocumentId,
+            VersionNumber,
+            cancellationToken);
+
+        if (previousCurrentVersionNumber != this.VersionNumber)
+        {
+            var eventPublisher = GetService<Shared.Events.IEventPublisher>();
+            var versionChangedEvent = new Shared.Events.VersionChangedEvent(
+                DocumentId: this.DocumentId,
+                NewCurrentVersionNumber: this.VersionNumber,
+                PreviousCurrentVersionNumber: previousCurrentVersionNumber,
+                ChangedBy: userId,
+                ChangedAt: DateTime.UtcNow
+            );
+
+            await eventPublisher.PublishAsync(versionChangedEvent, cancellationToken);
         }
     }
 
@@ -144,7 +221,7 @@ public class VersionEntity : ActiveRecordBase<VersionEntity>
     }
 
     public static async Task<List<VersionEntity>> GetDocumentVersions(
-        Guid documentId, 
+        Guid documentId,
         CancellationToken cancellationToken = default)
     {
         var context = GetDbContext();
@@ -155,7 +232,7 @@ public class VersionEntity : ActiveRecordBase<VersionEntity>
     }
 
     public static async Task<VersionEntity?> GetCurrentVersion(
-        Guid documentId, 
+        Guid documentId,
         CancellationToken cancellationToken = default)
     {
         var context = GetDbContext();
@@ -165,7 +242,7 @@ public class VersionEntity : ActiveRecordBase<VersionEntity>
     }
 
     public static async Task<int> Count(
-        Guid documentId, 
+        Guid documentId,
         CancellationToken cancellationToken = default)
     {
         var context = GetDbContext();

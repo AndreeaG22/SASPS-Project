@@ -63,20 +63,20 @@ public class DocumentEntity : ActiveRecordBase
                 $"File size exceeds the maximum allowed size of {MaxFileSizeInBytes / 1024 / 1024}MB");
         }
 
-        // Get file storage service from service locator
         var fileStorageService = GetService<IFileStorageService>();
 
-        // Save file to disk
-        FilePathOnDisk = await fileStorageService.SaveFileAsync(
-            fileContent,
-            FileName,
+        // Create document folder
+        FilePathOnDisk = await fileStorageService.CreateDocumentFolderAsync(
+            this.Id,
+            this.FileName,
             cancellationToken);
 
         FileSizeInBytes = fileContent.Length;
 
-        // Save entity to database
+        // Save entity to database first
         await Save(cancellationToken);
-        
+    
+        // Publish event - versioning module will handle saving the file
         var eventPublisher = GetService<IEventPublisher>();
         var documentCreatedEvent = new DocumentCreatedEvent(
             DocumentId: this.Id,
@@ -86,7 +86,7 @@ public class DocumentEntity : ActiveRecordBase
             CreatedBy: this.CreatedBy,
             CreatedAt: this.CreatedAt
         );
-    
+
         await eventPublisher.PublishAsync(documentCreatedEvent, cancellationToken);
     }
 
@@ -163,9 +163,9 @@ public class DocumentEntity : ActiveRecordBase
     {
         var context = GetDbContext();
 
-        // Delete file from disk
+        // Delete entire document folder
         var fileStorageService = GetService<IFileStorageService>();
-        await fileStorageService.DeleteFileAsync(FilePathOnDisk, cancellationToken);
+        await fileStorageService.DeleteDocumentFolderAsync(this.Id, cancellationToken);
 
         // Delete from database
         context.Set<DocumentEntity>().Remove(this);

@@ -11,71 +11,96 @@ public class FileStorageService : IFileStorageService
     public FileStorageService(ILogger<FileStorageService> logger)
     {
         _logger = logger;
-        _storageBasePath = Path.Combine(Directory.GetCurrentDirectory(), "VersionStorage");
-        
-        if (!Directory.Exists(_storageBasePath))
-        {
-            Directory.CreateDirectory(_storageBasePath);
-            _logger.LogInformation("Created version storage directory at {Path}", _storageBasePath);
-        }
+        _storageBasePath = Path.Combine(Directory.GetCurrentDirectory(), "DocumentStorage");
     }
 
-    public async Task<string> SaveFileAsync(byte[] fileContent, string fileName, CancellationToken cancellationToken = default)
+    public async Task<string> SaveVersionFileAsync(
+        Guid documentId, 
+        byte[] fileContent, 
+        int versionNumber, 
+        CancellationToken cancellationToken = default)
     {
         try
         {
-            var uniqueFileName = $"{Guid.NewGuid()}_{fileName}";
-            var filePath = Path.Combine(_storageBasePath, uniqueFileName);
+            var documentFolder = GetDocumentFolder(documentId);
+            if (documentFolder == null)
+            {
+                throw new InvalidOperationException($"Document folder not found for {documentId}");
+            }
 
-            await File.WriteAllBytesAsync(filePath, fileContent, cancellationToken);
-            
-            _logger.LogInformation("Version file saved successfully: {FilePath}", filePath);
-            
-            return filePath;
+            var originalFileName = Path.GetFileName(documentFolder).Split('_', 2)[1];
+            var versionFileName = $"v{versionNumber}_{originalFileName}";
+            var versionFilePath = Path.Combine(documentFolder, versionFileName);
+
+            await File.WriteAllBytesAsync(versionFilePath, fileContent, cancellationToken);
+            _logger.LogInformation("Version {Version} saved: {FilePath}", versionNumber, versionFilePath);
+
+            return versionFilePath;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error saving version file: {FileName}", fileName);
-            throw new InvalidOperationException($"Failed to save version file: {fileName}", ex);
+            _logger.LogError(ex, "Error saving version {Version} for document {DocumentId}", versionNumber, documentId);
+            throw new InvalidOperationException($"Failed to save version {versionNumber}", ex);
         }
     }
 
-    public async Task<byte[]> GetFileAsync(string filePath, CancellationToken cancellationToken = default)
+    public async Task<byte[]> GetVersionFileAsync(
+        Guid documentId, 
+        int versionNumber, 
+        CancellationToken cancellationToken = default)
     {
         try
         {
-            if (!File.Exists(filePath))
-                throw new FileNotFoundException($"Version file not found: {filePath}");
+            var documentFolder = GetDocumentFolder(documentId);
+            if (documentFolder == null)
+            {
+                throw new FileNotFoundException($"Document folder not found for {documentId}");
+            }
 
-            return await File.ReadAllBytesAsync(filePath, cancellationToken);
+            var versionFiles = Directory.GetFiles(documentFolder, $"v{versionNumber}_*");
+            if (versionFiles.Length == 0)
+            {
+                throw new FileNotFoundException($"Version {versionNumber} not found for document {documentId}");
+            }
+
+            return await File.ReadAllBytesAsync(versionFiles[0], cancellationToken);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error reading version file: {FilePath}", filePath);
+            _logger.LogError(ex, "Error reading version {Version} for document {DocumentId}", versionNumber, documentId);
             throw;
         }
     }
 
-    public Task DeleteFileAsync(string filePath, CancellationToken cancellationToken = default)
+    public async Task UpdateCurrentVersionMarkerAsync(
+        Guid documentId, 
+        int versionNumber, 
+        CancellationToken cancellationToken = default)
     {
         try
         {
-            if (File.Exists(filePath))
+            var documentFolder = GetDocumentFolder(documentId);
+            if (documentFolder == null)
             {
-                File.Delete(filePath);
-                _logger.LogInformation("Version file deleted successfully: {FilePath}", filePath);
-            }
-            else
-            {
-                _logger.LogWarning("Version file not found for deletion: {FilePath}", filePath);
+                throw new InvalidOperationException($"Document folder not found for {documentId}");
             }
 
-            return Task.CompletedTask;
+            var markerFilePath = Path.Combine(documentFolder, ".current_version");
+            await File.WriteAllTextAsync(markerFilePath, versionNumber.ToString(), cancellationToken);
+            
+            _logger.LogInformation("Updated current version marker for document {DocumentId} to version {Version}", 
+                documentId, versionNumber);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error deleting version file: {FilePath}", filePath);
-            throw new InvalidOperationException($"Failed to delete version file: {filePath}", ex);
+            _logger.LogError(ex, "Error updating current version marker for document {DocumentId}", documentId);
+            throw;
         }
+    }
+
+    private string? GetDocumentFolder(Guid documentId)
+    {
+        var folders = Directory.GetDirectories(_storageBasePath, $"{documentId}_*");
+        return folders.Length > 0 ? folders[0] : null;
     }
 }

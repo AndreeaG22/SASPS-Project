@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MetadataIndexing.Domain\MetadataIndexing.Domain.csproj" />
+    <ProjectReference Include="..\..\Document\Document.Application\Document.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

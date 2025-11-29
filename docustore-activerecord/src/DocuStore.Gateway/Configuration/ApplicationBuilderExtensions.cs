@@ -1,4 +1,6 @@
 ﻿using Document.API.Endpoints;
+using MetadataIndexing.API.Endpoints;
+using Tagging.API.Endpoints;
 using Versioning.API.Endpoints;
 
 namespace DocuStore.Gateway.Configuration;
@@ -30,7 +32,9 @@ public static class ApplicationBuilderExtensions
 
         // Map module endpoints
         app.MapDocumentEndpoints();
-        app.MapVersionEndpoints();  
+        app.MapVersionEndpoints();
+        app.MapTagEndpoints();
+        app.MapSearchEndpoints();
 
         // Map health and info endpoints
         app.MapHealthEndpoints();

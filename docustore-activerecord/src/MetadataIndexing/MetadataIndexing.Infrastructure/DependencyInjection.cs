@@ -1,5 +1,7 @@
 ﻿using MetadataIndexing.Domain.Common;
+using MetadataIndexing.Domain.Services;
 using MetadataIndexing.Infrastructure.Data;
+using MetadataIndexing.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +30,9 @@ public static class DependencyInjection
                 return scope.ServiceProvider.GetRequiredService<MetadataIndexingDbContext>();
             };
         });
+
+        // Register search service
+        services.AddScoped<IDocumentSearchService, DocumentSearchService>();
 
         return services;
     }

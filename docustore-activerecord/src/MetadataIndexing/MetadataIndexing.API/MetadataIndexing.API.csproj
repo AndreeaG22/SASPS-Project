@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Shared.csproj" />
     <ProjectReference Include="..\MetadataIndexing.Application\MetadataIndexing.Application.csproj" />
     <ProjectReference Include="..\MetadataIndexing.Infrastructure\MetadataIndexing.Infrastructure.csproj" />
   </ItemGroup>

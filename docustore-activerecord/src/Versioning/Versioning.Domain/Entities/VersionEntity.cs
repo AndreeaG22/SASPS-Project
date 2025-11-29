@@ -180,6 +180,9 @@ public class VersionEntity : ActiveRecordBase<VersionEntity>
 
         this.IsCurrent = true;
         this.SetUpdatedBy(userId);
+        
+        // Attach this entity to the context so its changes are saved
+        context.Set<VersionEntity>().Update(this);
 
         await context.SaveChangesAsync(cancellationToken);
 

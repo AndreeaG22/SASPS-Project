@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Document.Domain\Document.Domain.csproj" />
+    <ProjectReference Include="..\..\Versioning\Versioning.Domain\Versioning.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -6,20 +6,14 @@ using Versioning.Domain.Entities;
 
 namespace Versioning.Application.EventHandlers;
 
-public class DocumentCreatedEventHandler : IEventHandler<DocumentCreatedEvent>
+public class DocumentCreatedEventHandler(ILogger<DocumentCreatedEventHandler> logger)
+    : IEventHandler<DocumentCreatedEvent>
 {
-    private readonly ILogger<DocumentCreatedEventHandler> _logger;
-
-    public DocumentCreatedEventHandler(ILogger<DocumentCreatedEventHandler> logger)
-    {
-        _logger = logger;
-    }
-
     public async Task HandleAsync(DocumentCreatedEvent @event, CancellationToken cancellationToken = default)
     {
         try
         {
-            _logger.LogInformation(
+            logger.LogInformation(
                 "Creating initial version for document {DocumentId}", 
                 @event.DocumentId);
 
@@ -34,13 +28,13 @@ public class DocumentCreatedEventHandler : IEventHandler<DocumentCreatedEvent>
 
             await version.UploadAndSave(@event.FileContent, cancellationToken);
 
-            _logger.LogInformation(
+            logger.LogInformation(
                 "Successfully created version 1 for document {DocumentId}", 
                 @event.DocumentId);
         }
         catch (Exception ex)
         {
-            _logger.LogError(
+            logger.LogError(
                 ex, 
                 "Failed to create initial version for document {DocumentId}", 
                 @event.DocumentId);

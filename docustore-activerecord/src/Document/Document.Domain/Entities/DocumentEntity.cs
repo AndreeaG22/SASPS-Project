@@ -80,6 +80,8 @@ public class DocumentEntity : ActiveRecordBase
         var eventPublisher = GetService<IEventPublisher>();
         var documentCreatedEvent = new DocumentCreatedEvent(
             DocumentId: this.Id,
+            Title: this.Title,
+            Description: this.Description,
             FileName: this.FileName,
             FileContent: fileContent,
             ContentType: this.ContentType,

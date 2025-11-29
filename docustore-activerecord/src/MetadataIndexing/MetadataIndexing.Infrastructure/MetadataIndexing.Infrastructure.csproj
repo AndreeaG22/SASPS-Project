@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Shared.csproj" />
     <ProjectReference Include="..\MetadataIndexing.Application\MetadataIndexing.Application.csproj" />
     <ProjectReference Include="..\MetadataIndexing.Domain\MetadataIndexing.Domain.csproj" />
   </ItemGroup>

@@ -1,0 +1,30 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="Shared\Shared.csproj" Type="Classic C#" />
+    <Project Path="src/DocuStore.Gateway/DocuStore.Gateway.csproj" />
+  </Folder>
+  <Folder Name="/src/Document/">
+    <Project Path="src/Document/Document.API/Document.API.csproj" />
+    <Project Path="src/Document/Document.Application/Document.Application.csproj" />
+    <Project Path="src/Document/Document.Domain/Document.Domain.csproj" />
+    <Project Path="src/Document/Document.Infrastructure/Document.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/MetadataIndexing/">
+    <Project Path="src/MetadataIndexing/MetadataIndexing.API/MetadataIndexing.API.csproj" />
+    <Project Path="src/MetadataIndexing/MetadataIndexing.Application/MetadataIndexing.Application.csproj" />
+    <Project Path="src/MetadataIndexing/MetadataIndexing.Domain/MetadataIndexing.Domain.csproj" />
+    <Project Path="src/MetadataIndexing/MetadataIndexing.Infrastructure/MetadataIndexing.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Tagging/">
+    <Project Path="src/Tagging/Tagging.API/Tagging.API.csproj" />
+    <Project Path="src/Tagging/Tagging.Application/Tagging.Application.csproj" />
+    <Project Path="src/Tagging/Tagging.Domain/Tagging.Domain.csproj" />
+    <Project Path="src/Tagging/Tagging.Infrastructure/Tagging.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Versioning/">
+    <Project Path="src/Versioning/Versioning.API/Versioning.API.csproj" />
+    <Project Path="src/Versioning/Versioning.Application/Versioning.Application.csproj" />
+    <Project Path="src/Versioning/Versioning.Domain/Versioning.Domain.csproj" />
+    <Project Path="src/Versioning/Versioning.Infrastructure/Versioning.Infrastructure.csproj" />
+  </Folder>
+</Solution>

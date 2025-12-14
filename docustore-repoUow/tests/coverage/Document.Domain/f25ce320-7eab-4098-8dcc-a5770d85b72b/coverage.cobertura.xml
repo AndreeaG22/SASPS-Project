@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="utf-8"?>
+<coverage line-rate="0.5211" branch-rate="0.9166" version="1.9" timestamp="1765726967" lines-covered="74" lines-valid="142" branches-covered="22" branches-valid="24">
+  <sources>
+    <source>/home/ioan/SASPS-Project/docustore-repoUow/</source>
+  </sources>
+  <packages>
+    <package name="Shared" line-rate="0" branch-rate="0" complexity="44">
+      <classes>
+        <class name="Shared.Models.ErrorResponse" filename="Shared/Models/ErrorResponse.cs" line-rate="0" branch-rate="1" complexity="4">
+          <methods>
+            <method name="get_Message" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="4" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_StatusCode" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="5" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Errors" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="6" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.String,System.Int32,System.Collections.Generic.Dictionary`2&lt;System.String,System.String[]&gt;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="3" hits="0" branch="False" />
+                <line number="7" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="4" hits="0" branch="False" />
+            <line number="5" hits="0" branch="False" />
+            <line number="6" hits="0" branch="False" />
+            <line number="3" hits="0" branch="False" />
+            <line number="7" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="Shared.Events.DocumentCreatedEvent" filename="Shared/Events/DocumentCreatedEvent.cs" line-rate="0" branch-rate="1" complexity="9">
+          <methods>
+            <method name="get_DocumentId" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="4" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Title" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="5" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Description" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="6" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_FileName" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="7" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_FileContent" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="8" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_ContentType" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="9" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_CreatedBy" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="10" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_CreatedAt" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="11" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.Guid,System.String,System.String,System.String,System.Byte[],System.String,System.String,System.DateTime)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="3" hits="0" branch="False" />
+                <line number="12" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="4" hits="0" branch="False" />
+            <line number="5" hits="0" branch="False" />
+            <line number="6" hits="0" branch="False" />
+            <line number="7" hits="0" branch="False" />
+            <line number="8" hits="0" branch="False" />
+            <line number="9" hits="0" branch="False" />
+            <line number="10" hits="0" branch="False" />
+            <line number="11" hits="0" branch="False" />
+            <line number="3" hits="0" branch="False" />
+            <line number="12" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="Shared.Events.DocumentDeletedEvent" filename="Shared/Events/DocumentDeletedEvent.cs" line-rate="0" branch-rate="1" complexity="4">
+          <methods>
+            <method name="get_DocumentId" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="4" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_DeletedBy" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="5" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_DeletedAt" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="6" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.Guid,System.String,System.DateTime)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="3" hits="0" branch="False" />
+                <line number="7" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="4" hits="0" branch="False" />
+            <line number="5" hits="0" branch="False" />
+            <line number="6" hits="0" branch="False" />
+            <line number="3" hits="0" branch="False" />
+            <line number="7" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="Shared.Events.DocumentDetailsResponse" filename="Shared/Events/DocumentDetailsResponse.cs" line-rate="0" branch-rate="1" complexity="10">
+          <methods>
+            <method name="get_Id" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="4" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Title" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="5" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Description" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="6" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_FileName" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="7" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_FileSizeInBytes" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="8" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_ContentType" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="9" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_CreatedAt" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="10" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_CreatedBy" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="11" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Status" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="12" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.Guid,System.String,System.String,System.String,System.Int64,System.String,System.DateTime,System.String,System.String)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="3" hits="0" branch="False" />
+                <line number="13" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="4" hits="0" branch="False" />
+            <line number="5" hits="0" branch="False" />
+            <line number="6" hits="0" branch="False" />
+            <line number="7" hits="0" branch="False" />
+            <line number="8" hits="0" branch="False" />
+            <line number="9" hits="0" branch="False" />
+            <line number="10" hits="0" branch="False" />
+            <line number="11" hits="0" branch="False" />
+            <line number="12" hits="0" branch="False" />
+            <line number="3" hits="0" branch="False" />
+            <line number="13" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="Shared.Events.DocumentUpdatedEvent" filename="Shared/Events/DocumentUpdatedEvent.cs" line-rate="0" branch-rate="1" complexity="6">
+          <methods>
+            <method name="get_DocumentId" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="4" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Title" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="5" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Description" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="6" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_UpdatedBy" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="7" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_UpdatedAt" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="8" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.Guid,System.String,System.String,System.String,System.DateTime)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="3" hits="0" branch="False" />
+                <line number="9" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="4" hits="0" branch="False" />
+            <line number="5" hits="0" branch="False" />
+            <line number="6" hits="0" branch="False" />
+            <line number="7" hits="0" branch="False" />
+            <line number="8" hits="0" branch="False" />
+            <line number="3" hits="0" branch="False" />
+            <line number="9" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="Shared.Events.GetDocumentDetailsEvent" filename="Shared/Events/GetDocumentDetailsEvent.cs" line-rate="0" branch-rate="1" complexity="2">
+          <methods>
+            <method name="get_DocumentId" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="4" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.Guid)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="3" hits="0" branch="False" />
+                <line number="5" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="4" hits="0" branch="False" />
+            <line number="3" hits="0" branch="False" />
+            <line number="5" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="Shared.Events.InMemoryEventPublisher" filename="Shared/Events/InMemoryEventPublisher.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="(Microsoft.Extensions.DependencyInjection.IServiceScopeFactory,Microsoft.Extensions.Logging.ILogger`1&lt;Shared.Events.InMemoryEventPublisher&gt;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="6" hits="0" branch="False" />
+                <line number="7" hits="0" branch="False" />
+                <line number="8" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="6" hits="0" branch="False" />
+            <line number="7" hits="0" branch="False" />
+            <line number="8" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="Shared.Events.InMemoryEventPublisher/&lt;PublishAsync&gt;d__3`1" filename="Shared/Events/InMemoryEventPublisher.cs" line-rate="0" branch-rate="0" complexity="2">
+          <methods>
+            <method name="MoveNext" signature="()" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="13" hits="0" branch="False" />
+                <line number="14" hits="0" branch="False" />
+                <line number="15" hits="0" branch="False" />
+                <line number="17" hits="0" branch="False" />
+                <line number="18" hits="0" branch="False" />
+                <line number="20" hits="0" branch="True" condition-coverage="0% (0/2)">
+                  <conditions>
+                    <condition number="459" type="jump" coverage="0%" />
+                  </conditions>
+                </line>
+                <line number="21" hits="0" branch="False" />
+                <line number="23" hits="0" branch="False" />
+                <line number="24" hits="0" branch="False" />
+                <line number="25" hits="0" branch="False" />
+                <line number="26" hits="0" branch="False" />
+                <line number="27" hits="0" branch="False" />
+                <line number="28" hits="0" branch="False" />
+                <line number="29" hits="0" branch="False" />
+                <line number="30" hits="0" branch="False" />
+                <line number="31" hits="0" branch="False" />
+                <line number="32" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="13" hits="0" branch="False" />
+            <line number="14" hits="0" branch="False" />
+            <line number="15" hits="0" branch="False" />
+            <line number="17" hits="0" branch="False" />
+            <line number="18" hits="0" branch="False" />
+            <line number="20" hits="0" branch="True" condition-coverage="0% (0/2)">
+              <conditions>
+                <condition number="459" type="jump" coverage="0%" />
+              </conditions>
+            </line>
+            <line number="21" hits="0" branch="False" />
+            <line number="23" hits="0" branch="False" />
+            <line number="24" hits="0" branch="False" />
+            <line number="25" hits="0" branch="False" />
+            <line number="26" hits="0" branch="False" />
+            <line number="27" hits="0" branch="False" />
+            <line number="28" hits="0" branch="False" />
+            <line number="29" hits="0" branch="False" />
+            <line number="30" hits="0" branch="False" />
+            <line number="31" hits="0" branch="False" />
+            <line number="32" hits="0" branch="False" />
+          </lines>
+        </class>
+        <class name="Shared.Events.VersionChangedEvent" filename="Shared/Events/VersionChangedEvent.cs" line-rate="0" branch-rate="1" complexity="6">
+          <methods>
+            <method name="get_DocumentId" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="4" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_NewCurrentVersionNumber" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="5" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_PreviousCurrentVersionNumber" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="6" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_ChangedBy" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="7" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name="get_ChangedAt" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="8" hits="0" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(System.Guid,System.Int32,System.Int32,System.String,System.DateTime)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="3" hits="0" branch="False" />
+                <line number="9" hits="0" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="4" hits="0" branch="False" />
+            <line number="5" hits="0" branch="False" />
+            <line number="6" hits="0" branch="False" />
+            <line number="7" hits="0" branch="False" />
+            <line number="8" hits="0" branch="False" />
+            <line number="3" hits="0" branch="False" />
+            <line number="9" hits="0" branch="False" />
+          </lines>
+        </class>
+      </classes>
+    </package>
+    <package name="Document.Domain" line-rate="1" branch-rate="1" complexity="37">
+      <classes>
+        <class name="Document.Domain.Entities.DocumentEntity" filename="src/Document/Document.Domain/Entities/DocumentEntity.cs" line-rate="1" branch-rate="1" complexity="37">
+          <methods>
+            <method name="get_Id" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="13" hits="48" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Title" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="14" hits="100" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Description" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="15" hits="57" branch="False" />
+              </lines>
+            </method>
+            <method name="get_FileName" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="16" hits="87" branch="False" />
+              </lines>
+            </method>
+            <method name="get_FilePathOnDisk" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="17" hits="47" branch="False" />
+              </lines>
+            </method>
+            <method name="get_FileSizeInBytes" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="18" hits="6" branch="False" />
+              </lines>
+            </method>
+            <method name="get_ContentType" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="19" hits="87" branch="False" />
+              </lines>
+            </method>
+            <method name="get_Status" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="20" hits="140" branch="False" />
+              </lines>
+            </method>
+            <method name="get_CreatedAt" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="21" hits="96" branch="False" />
+              </lines>
+            </method>
+            <method name="get_CreatedBy" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="22" hits="92" branch="False" />
+              </lines>
+            </method>
+            <method name="get_UpdatedAt" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="23" hits="39" branch="False" />
+              </lines>
+            </method>
+            <method name="get_UpdatedBy" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="24" hits="30" branch="False" />
+              </lines>
+            </method>
+            <method name="get_DeletedAt" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="25" hits="27" branch="False" />
+              </lines>
+            </method>
+            <method name="get_DeletedBy" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="26" hits="23" branch="False" />
+              </lines>
+            </method>
+            <method name="Create" signature="(System.String,System.String,System.String,System.String,System.String)" line-rate="1" branch-rate="1" complexity="8">
+              <lines>
+                <line number="37" hits="50" branch="False" />
+                <line number="39" hits="50" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="9" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="40" hits="5" branch="False" />
+                <line number="42" hits="45" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="37" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="43" hits="1" branch="False" />
+                <line number="45" hits="44" branch="True" condition-coverage="100% (4/4)">
+                  <conditions>
+                    <condition number="51" type="jump" coverage="100%" />
+                    <condition number="71" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="46" hits="1" branch="False" />
+                <line number="48" hits="43" branch="False" />
+                <line number="49" hits="43" branch="False" />
+                <line number="50" hits="43" branch="False" />
+                <line number="51" hits="43" branch="False" />
+                <line number="52" hits="43" branch="False" />
+                <line number="53" hits="43" branch="False" />
+                <line number="54" hits="43" branch="False" />
+                <line number="55" hits="43" branch="False" />
+                <line number="56" hits="43" branch="False" />
+                <line number="57" hits="43" branch="False" />
+                <line number="59" hits="43" branch="False" />
+                <line number="60" hits="43" branch="False" />
+              </lines>
+            </method>
+            <method name="SetFileInfo" signature="(System.String,System.Int64)" line-rate="1" branch-rate="1" complexity="2">
+              <lines>
+                <line number="63" hits="5" branch="False" />
+                <line number="64" hits="5" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="12" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="65" hits="2" branch="False" />
+                <line number="66" hits="2" branch="False" />
+                <line number="67" hits="2" branch="False" />
+                <line number="70" hits="3" branch="False" />
+                <line number="71" hits="3" branch="False" />
+                <line number="72" hits="3" branch="False" />
+              </lines>
+            </method>
+            <method name="Update" signature="(System.String,System.String,System.String)" line-rate="1" branch-rate="1" complexity="8">
+              <lines>
+                <line number="75" hits="12" branch="False" />
+                <line number="77" hits="12" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="9" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="78" hits="3" branch="False" />
+                <line number="80" hits="9" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="37" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="81" hits="1" branch="False" />
+                <line number="83" hits="8" branch="True" condition-coverage="100% (4/4)">
+                  <conditions>
+                    <condition number="51" type="jump" coverage="100%" />
+                    <condition number="71" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="84" hits="1" branch="False" />
+                <line number="86" hits="7" branch="False" />
+                <line number="87" hits="7" branch="False" />
+                <line number="88" hits="7" branch="False" />
+                <line number="89" hits="7" branch="False" />
+                <line number="90" hits="7" branch="False" />
+              </lines>
+            </method>
+            <method name="SoftDelete" signature="(System.String)" line-rate="1" branch-rate="1" complexity="2">
+              <lines>
+                <line number="93" hits="15" branch="False" />
+                <line number="94" hits="15" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="12" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="95" hits="2" branch="False" />
+                <line number="96" hits="2" branch="False" />
+                <line number="99" hits="13" branch="False" />
+                <line number="100" hits="13" branch="False" />
+                <line number="101" hits="13" branch="False" />
+                <line number="102" hits="13" branch="False" />
+                <line number="103" hits="13" branch="False" />
+                <line number="104" hits="13" branch="False" />
+              </lines>
+            </method>
+            <method name="Restore" signature="(System.String)" line-rate="1" branch-rate="1" complexity="2">
+              <lines>
+                <line number="107" hits="8" branch="False" />
+                <line number="108" hits="8" branch="True" condition-coverage="100% (2/2)">
+                  <conditions>
+                    <condition number="15" type="jump" coverage="100%" />
+                  </conditions>
+                </line>
+                <line number="109" hits="2" branch="False" />
+                <line number="110" hits="2" branch="False" />
+                <line number="113" hits="6" branch="False" />
+                <line number="114" hits="6" branch="False" />
+                <line number="115" hits="6" branch="False" />
+                <line number="116" hits="6" branch="False" />
+                <line number="117" hits="6" branch="False" />
+                <line number="118" hits="6" branch="False" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="29" hits="129" branch="False" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="13" hits="48" branch="False" />
+            <line number="14" hits="100" branch="False" />
+            <line number="15" hits="57" branch="False" />
+            <line number="16" hits="87" branch="False" />
+            <line number="17" hits="47" branch="False" />
+            <line number="18" hits="6" branch="False" />
+            <line number="19" hits="87" branch="False" />
+            <line number="20" hits="140" branch="False" />
+            <line number="21" hits="96" branch="False" />
+            <line number="22" hits="92" branch="False" />
+            <line number="23" hits="39" branch="False" />
+            <line number="24" hits="30" branch="False" />
+            <line number="25" hits="27" branch="False" />
+            <line number="26" hits="23" branch="False" />
+            <line number="37" hits="50" branch="False" />
+            <line number="39" hits="50" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="9" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="40" hits="5" branch="False" />
+            <line number="42" hits="45" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="37" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="43" hits="1" branch="False" />
+            <line number="45" hits="44" branch="True" condition-coverage="100% (4/4)">
+              <conditions>
+                <condition number="51" type="jump" coverage="100%" />
+                <condition number="71" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="46" hits="1" branch="False" />
+            <line number="48" hits="43" branch="False" />
+            <line number="49" hits="43" branch="False" />
+            <line number="50" hits="43" branch="False" />
+            <line number="51" hits="43" branch="False" />
+            <line number="52" hits="43" branch="False" />
+            <line number="53" hits="43" branch="False" />
+            <line number="54" hits="43" branch="False" />
+            <line number="55" hits="43" branch="False" />
+            <line number="56" hits="43" branch="False" />
+            <line number="57" hits="43" branch="False" />
+            <line number="59" hits="43" branch="False" />
+            <line number="60" hits="43" branch="False" />
+            <line number="63" hits="5" branch="False" />
+            <line number="64" hits="5" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="12" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="65" hits="2" branch="False" />
+            <line number="66" hits="2" branch="False" />
+            <line number="67" hits="2" branch="False" />
+            <line number="70" hits="3" branch="False" />
+            <line number="71" hits="3" branch="False" />
+            <line number="72" hits="3" branch="False" />
+            <line number="75" hits="12" branch="False" />
+            <line number="77" hits="12" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="9" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="78" hits="3" branch="False" />
+            <line number="80" hits="9" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="37" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="81" hits="1" branch="False" />
+            <line number="83" hits="8" branch="True" condition-coverage="100% (4/4)">
+              <conditions>
+                <condition number="51" type="jump" coverage="100%" />
+                <condition number="71" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="84" hits="1" branch="False" />
+            <line number="86" hits="7" branch="False" />
+            <line number="87" hits="7" branch="False" />
+            <line number="88" hits="7" branch="False" />
+            <line number="89" hits="7" branch="False" />
+            <line number="90" hits="7" branch="False" />
+            <line number="93" hits="15" branch="False" />
+            <line number="94" hits="15" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="12" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="95" hits="2" branch="False" />
+            <line number="96" hits="2" branch="False" />
+            <line number="99" hits="13" branch="False" />
+            <line number="100" hits="13" branch="False" />
+            <line number="101" hits="13" branch="False" />
+            <line number="102" hits="13" branch="False" />
+            <line number="103" hits="13" branch="False" />
+            <line number="104" hits="13" branch="False" />
+            <line number="107" hits="8" branch="False" />
+            <line number="108" hits="8" branch="True" condition-coverage="100% (2/2)">
+              <conditions>
+                <condition number="15" type="jump" coverage="100%" />
+              </conditions>
+            </line>
+            <line number="109" hits="2" branch="False" />
+            <line number="110" hits="2" branch="False" />
+            <line number="113" hits="6" branch="False" />
+            <line number="114" hits="6" branch="False" />
+            <line number="115" hits="6" branch="False" />
+            <line number="116" hits="6" branch="False" />
+            <line number="117" hits="6" branch="False" />
+            <line number="118" hits="6" branch="False" />
+            <line number="29" hits="129" branch="False" />
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>

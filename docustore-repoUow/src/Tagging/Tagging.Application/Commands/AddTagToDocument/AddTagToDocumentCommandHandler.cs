@@ -16,14 +16,12 @@ public class AddTagToDocumentCommandHandler : IRequestHandler<AddTagToDocumentCo
 
     public async Task<DocumentTagDto> Handle(AddTagToDocumentCommand request, CancellationToken cancellationToken)
     {
-        // Validate tag exists
         var tag = await _unitOfWork.Tags.GetByIdAsync(request.TagId, cancellationToken);
         if (tag == null)
         {
             throw new InvalidOperationException($"Tag with ID '{request.TagId}' not found");
         }
 
-        // Check if association already exists
         var existingAssociation = await _unitOfWork.DocumentTags.GetByDocumentAndTagAsync(
             request.DocumentId,
             request.TagId,
@@ -39,7 +37,6 @@ public class AddTagToDocumentCommandHandler : IRequestHandler<AddTagToDocumentCo
         await _unitOfWork.DocumentTags.AddAsync(documentTag, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        // Reload to get tag information
         var savedDocumentTag = await _unitOfWork.DocumentTags.GetByIdAsync(documentTag.Id, cancellationToken);
         if (savedDocumentTag == null)
         {

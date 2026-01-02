@@ -35,7 +35,6 @@ public class CreateVersionCommandHandler : IRequestHandler<CreateVersionCommand,
         // Get next version number
         var nextVersionNumber = await _unitOfWork.Versions.GetNextVersionNumberAsync(request.DocumentId, cancellationToken);
 
-        // Create version entity
         var version = VersionEntity.Create(
             documentId: request.DocumentId,
             versionNumber: nextVersionNumber,
@@ -45,14 +44,12 @@ public class CreateVersionCommandHandler : IRequestHandler<CreateVersionCommand,
             createdBy: request.UserId
         );
 
-        // Save file to disk
         var filePathOnDisk = await _fileStorageService.SaveVersionFileAsync(
             request.DocumentId,
             request.FileContent,
             nextVersionNumber,
             cancellationToken);
 
-        // Set file info
         version.SetFileInfo(filePathOnDisk, request.FileContent.Length);
 
         // Mark other versions as not current
@@ -63,11 +60,9 @@ public class CreateVersionCommandHandler : IRequestHandler<CreateVersionCommand,
         }
         _unitOfWork.Versions.UpdateRange(currentVersions);
 
-        // Add new version and save
         await _unitOfWork.Versions.AddAsync(version, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        // Update current version marker on disk
         await _fileStorageService.UpdateCurrentVersionMarkerAsync(
             request.DocumentId,
             nextVersionNumber,

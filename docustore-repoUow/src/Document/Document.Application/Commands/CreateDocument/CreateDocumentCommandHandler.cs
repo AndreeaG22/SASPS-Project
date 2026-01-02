@@ -40,14 +40,11 @@ public class CreateDocumentCommandHandler : IRequestHandler<CreateDocumentComman
             document.FileName,
             cancellationToken);
 
-        // Set file info on the document entity
         document.SetFileInfo(filePathOnDisk, request.FileContent.Length);
 
-        // Add to repository and save
         await _unitOfWork.Documents.AddAsync(document, cancellationToken);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        // Publish event - versioning module will handle saving the file
         var documentCreatedEvent = new DocumentCreatedEvent(
             DocumentId: document.Id,
             Title: document.Title,

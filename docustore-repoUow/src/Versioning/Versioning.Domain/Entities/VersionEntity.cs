@@ -22,7 +22,6 @@ public class VersionEntity
     public DateTime? UpdatedAt { get; private set; }
     public string? UpdatedBy { get; private set; }
 
-    // EF Core requires a parameterless constructor
     private VersionEntity()
     {
     }

@@ -34,7 +34,6 @@ public class GetDocumentsByTagQueryHandler : IRequestHandler<GetDocumentsByTagQu
         var documentTags = await _documentTagRepository.GetByTagIdAsync(request.TagId, cancellationToken);
         var documentIds = documentTags.Select(dt => dt.DocumentId).Distinct().ToList();
 
-        // Fetch document details from Document module using MediatR
         var documents = new List<DocumentDto>();
         foreach (var docId in documentIds)
         {

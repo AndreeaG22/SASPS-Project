@@ -19,7 +19,6 @@ public static class TagEndpoints
         var group = endpoints.MapGroup("/api/tags")
             .WithTags("Tags");
 
-        // US-010: Create a Tag
         group.MapPost("/", CreateTag)
             .Produces<TagResponse>(StatusCodes.Status201Created)
             .Produces<ErrorResponse>(StatusCodes.Status400BadRequest)
@@ -27,14 +26,12 @@ public static class TagEndpoints
             .WithSummary("Create a new tag")
             .WithDescription("Create a new tag with a unique name and optional description");
 
-        // US-011: List All Available Tags
         group.MapGet("/", ListTags)
             .Produces<List<TagResponse>>(StatusCodes.Status200OK)
             .WithName("ListTags")
             .WithSummary("List all tags")
             .WithDescription("Retrieve all available tags sorted alphabetically by name");
 
-        // US-012: Add Tag to Document
         group.MapPost("/documents/{documentId:guid}/tags", AddTagToDocument)
             .Produces<DocumentTagResponse>(StatusCodes.Status201Created)
             .Produces<ErrorResponse>(StatusCodes.Status400BadRequest)
@@ -43,7 +40,6 @@ public static class TagEndpoints
             .WithSummary("Add tag to document")
             .WithDescription("Associate a tag with a document");
 
-        // US-013: Remove Tag from Document
         group.MapDelete("/documents/{documentId:guid}/tags/{tagId:guid}", RemoveTagFromDocument)
             .Produces(StatusCodes.Status204NoContent)
             .Produces<ErrorResponse>(StatusCodes.Status404NotFound)
@@ -51,7 +47,6 @@ public static class TagEndpoints
             .WithSummary("Remove tag from document")
             .WithDescription("Remove the association between a tag and a document");
 
-        // US-014: View Document Tags
         group.MapGet("/documents/{documentId:guid}/tags", GetDocumentTags)
             .Produces<List<DocumentTagResponse>>(StatusCodes.Status200OK)
             .Produces<ErrorResponse>(StatusCodes.Status404NotFound)
@@ -59,7 +54,6 @@ public static class TagEndpoints
             .WithSummary("Get document tags")
             .WithDescription("Retrieve all tags associated with a specific document");
 
-        // US-015: Find Documents by Tag
         group.MapGet("/{tagId:guid}/documents", GetDocumentsByTag)
             .Produces<List<DocumentResponse>>(StatusCodes.Status200OK)
             .Produces<ErrorResponse>(StatusCodes.Status404NotFound)
@@ -67,7 +61,6 @@ public static class TagEndpoints
             .WithSummary("Find documents by tag")
             .WithDescription("Retrieve all documents that have a specific tag");
 
-        // US-015 with multiple tags support
         group.MapGet("/documents", GetDocumentsByTags)
             .Produces<List<DocumentResponse>>(StatusCodes.Status200OK)
             .WithName("GetDocumentsByTags")

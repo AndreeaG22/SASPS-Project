@@ -14,7 +14,6 @@ public static class SearchEndpoints
         var group = endpoints.MapGroup("/api/search")
             .WithTags("Search");
 
-        // US-016, US-017, US-018, US-019, US-020: Search documents with all filters
         group.MapGet("/documents", SearchDocuments)
             .Produces<SearchResponse>(StatusCodes.Status200OK)
             .Produces<ErrorResponse>(StatusCodes.Status400BadRequest)
@@ -22,7 +21,6 @@ public static class SearchEndpoints
             .WithSummary("Search documents")
             .WithDescription("Search documents by keyword, date range, creator with pagination and sorting");
 
-        // Reindex all documents (admin endpoint)
         group.MapPost("/reindex", ReindexDocuments)
             .Produces<object>(StatusCodes.Status200OK)
             .Produces<ErrorResponse>(StatusCodes.Status500InternalServerError)

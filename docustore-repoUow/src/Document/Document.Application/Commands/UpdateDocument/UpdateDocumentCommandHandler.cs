@@ -22,10 +22,8 @@ public class UpdateDocumentCommandHandler : IRequestHandler<UpdateDocumentComman
             throw new InvalidOperationException($"Document with ID '{request.Id}' not found");
         }
 
-        // Update domain entity (business logic in domain)
         document.Update(request.Title, request.Description, request.UserId);
 
-        // Update via repository and save
         _unitOfWork.Documents.Update(document);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 

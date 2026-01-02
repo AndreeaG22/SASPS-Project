@@ -17,7 +17,6 @@ public class DocumentTag
     // Navigation property
     public Tag Tag { get; private set; } = null!;
 
-    // EF Core requires a parameterless constructor
     private DocumentTag() { }
 
     public static DocumentTag Create(Guid documentId, Guid tagId, string createdBy)

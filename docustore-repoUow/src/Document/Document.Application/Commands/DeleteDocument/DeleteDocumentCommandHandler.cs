@@ -21,10 +21,8 @@ public class DeleteDocumentCommandHandler : IRequestHandler<DeleteDocumentComman
             throw new InvalidOperationException($"Document with ID '{request.Id}' not found");
         }
 
-        // Soft delete via domain entity (business logic in domain)
         document.SoftDelete(request.UserId);
 
-        // Update via repository and save
         _unitOfWork.Documents.Update(document);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 

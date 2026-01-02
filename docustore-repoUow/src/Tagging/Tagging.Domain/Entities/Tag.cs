@@ -14,7 +14,6 @@ public class Tag
     public DateTime? UpdatedAt { get; private set; }
     public string? UpdatedBy { get; private set; }
 
-    // EF Core requires a parameterless constructor
     private Tag() { }
 
     public static Tag Create(string name, string? description, string createdBy)

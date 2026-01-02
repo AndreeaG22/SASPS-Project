@@ -26,7 +26,6 @@ public class GetDocumentsByTagsQueryHandler : IRequestHandler<GetDocumentsByTags
             throw new ArgumentException("At least one tag ID must be provided");
         }
 
-        // Get all document-tag associations for the specified tags
         var documentTags = await _documentTagRepository.GetByTagIdsAsync(request.TagIds, cancellationToken);
 
         // Group by document ID and filter for documents that have ALL specified tags
@@ -36,7 +35,6 @@ public class GetDocumentsByTagsQueryHandler : IRequestHandler<GetDocumentsByTags
             .Select(g => g.Key)
             .ToList();
 
-        // Fetch document details from Document module using MediatR
         var documents = new List<DocumentDto>();
         foreach (var docId in documentIdsWithAllTags)
         {

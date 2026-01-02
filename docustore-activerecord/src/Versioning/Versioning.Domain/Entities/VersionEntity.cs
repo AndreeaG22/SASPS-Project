@@ -135,6 +135,7 @@ public class VersionEntity : ActiveRecordBase<VersionEntity>
     {
         var context = GetDbContext();
         return await context.Set<VersionEntity>()
+            .AsNoTracking()
             .Where(v => v.DocumentId == documentId && v.VersionNumber == versionNumber)
             .FirstOrDefaultAsync(cancellationToken);
     }
@@ -148,7 +149,6 @@ public class VersionEntity : ActiveRecordBase<VersionEntity>
         }
         catch
         {
-            // If we can't verify, fail safely by not allowing the version
             return false;
         }
     }
@@ -158,7 +158,9 @@ public class VersionEntity : ActiveRecordBase<VersionEntity>
         // Get the current version first
         var context = GetDbContext();
         var currentVersion = await context.Set<VersionEntity>()
+            .AsNoTracking()
             .Where(v => v.DocumentId == this.DocumentId && v.IsCurrent)
+            .OrderByDescending(v => v.VersionNumber)
             .FirstOrDefaultAsync(cancellationToken);
 
         if (currentVersion?.Id == this.Id)
@@ -169,7 +171,7 @@ public class VersionEntity : ActiveRecordBase<VersionEntity>
         var previousCurrentVersionNumber = currentVersion?.VersionNumber ?? this.VersionNumber;
 
         var allVersions = await context.Set<VersionEntity>()
-            .Where(v => v.DocumentId == this.DocumentId && v.IsCurrent)
+            .Where(v => v.DocumentId == this.DocumentId && v.IsCurrent && v.Id != this.Id)
             .ToListAsync(cancellationToken);
 
         foreach (var version in allVersions)
@@ -178,11 +180,16 @@ public class VersionEntity : ActiveRecordBase<VersionEntity>
             version.SetUpdatedBy(userId);
         }
 
-        this.IsCurrent = true;
-        this.SetUpdatedBy(userId);
+        var versionToUpdate = await context.Set<VersionEntity>().FindAsync(new object[] { this.Id }, cancellationToken);
+        if (versionToUpdate == null)
+        {
+            throw new InvalidOperationException($"Version with ID '{this.Id}' not found");
+        }
+
+        versionToUpdate.IsCurrent = true;
+        versionToUpdate.SetUpdatedBy(userId);
         
-        // Attach this entity to the context so its changes are saved
-        context.Set<VersionEntity>().Update(this);
+        context.Set<VersionEntity>().Update(versionToUpdate);
 
         await context.SaveChangesAsync(cancellationToken);
 
@@ -205,6 +212,9 @@ public class VersionEntity : ActiveRecordBase<VersionEntity>
 
             await eventPublisher.PublishAsync(versionChangedEvent, cancellationToken);
         }
+        
+        this.IsCurrent = versionToUpdate.IsCurrent;
+        this.SetUpdatedBy(userId);
     }
 
     private static async Task<int> GetNextVersionNumber(Guid documentId, CancellationToken cancellationToken)
@@ -229,6 +239,7 @@ public class VersionEntity : ActiveRecordBase<VersionEntity>
     {
         var context = GetDbContext();
         return await context.Set<VersionEntity>()
+            .AsNoTracking()
             .Where(v => v.DocumentId == documentId)
             .OrderByDescending(v => v.VersionNumber)
             .ToListAsync(cancellationToken);
@@ -240,7 +251,9 @@ public class VersionEntity : ActiveRecordBase<VersionEntity>
     {
         var context = GetDbContext();
         return await context.Set<VersionEntity>()
+            .AsNoTracking()
             .Where(v => v.DocumentId == documentId && v.IsCurrent)
+            .OrderByDescending(v => v.VersionNumber)
             .FirstOrDefaultAsync(cancellationToken);
     }
 

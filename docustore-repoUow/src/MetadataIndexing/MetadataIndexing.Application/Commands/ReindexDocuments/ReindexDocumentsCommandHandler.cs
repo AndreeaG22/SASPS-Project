@@ -38,14 +38,12 @@ public class ReindexDocumentsCommandHandler : IRequestHandler<ReindexDocumentsCo
             {
                 try
                 {
-                    // Check if already indexed
                     var existingIndex = await _unitOfWork.SearchDocumentIndexes.GetByDocumentIdAsync(doc.Id, cancellationToken);
                     
                     if (existingIndex != null)
                     {
                         _logger.LogDebug("Document {DocumentId} already indexed, updating", doc.Id);
                         
-                        // Update existing index
                         existingIndex.UpdateMetadata(
                             title: doc.Title,
                             description: doc.Description,
@@ -58,7 +56,6 @@ public class ReindexDocumentsCommandHandler : IRequestHandler<ReindexDocumentsCo
                     {
                         _logger.LogDebug("Indexing new document {DocumentId}", doc.Id);
                         
-                        // Create new index entry
                         var searchIndex = SearchDocumentIndex.Create(
                             documentId: doc.Id,
                             title: doc.Title,
@@ -79,7 +76,6 @@ public class ReindexDocumentsCommandHandler : IRequestHandler<ReindexDocumentsCo
                 catch (Exception ex)
                 {
                     _logger.LogError(ex, "Failed to index document {DocumentId}", doc.Id);
-                    // Continue with other documents
                 }
             }
 

@@ -16,7 +16,6 @@ public class CreateTagCommandHandler : IRequestHandler<CreateTagCommand, TagDto>
 
     public async Task<TagDto> Handle(CreateTagCommand request, CancellationToken cancellationToken)
     {
-        // Check if tag with same name already exists (case-insensitive)
         var existingTag = await _unitOfWork.Tags.GetByNameAsync(request.Name, cancellationToken);
         if (existingTag != null)
         {

@@ -25,6 +25,7 @@ public class VersionRepository : IVersionRepository
     public async Task<VersionEntity?> GetByVersionNumberAsync(Guid documentId, int versionNumber, CancellationToken cancellationToken = default)
     {
         return await _context.Versions
+            .AsNoTracking()
             .Where(v => v.DocumentId == documentId && v.VersionNumber == versionNumber)
             .FirstOrDefaultAsync(cancellationToken);
     }
@@ -32,13 +33,16 @@ public class VersionRepository : IVersionRepository
     public async Task<VersionEntity?> GetCurrentVersionAsync(Guid documentId, CancellationToken cancellationToken = default)
     {
         return await _context.Versions
+            .AsNoTracking()
             .Where(v => v.DocumentId == documentId && v.IsCurrent)
+            .OrderByDescending(v => v.VersionNumber)
             .FirstOrDefaultAsync(cancellationToken);
     }
 
     public async Task<List<VersionEntity>> GetByDocumentIdAsync(Guid documentId, CancellationToken cancellationToken = default)
     {
         return await _context.Versions
+            .AsNoTracking()
             .Where(v => v.DocumentId == documentId)
             .OrderByDescending(v => v.VersionNumber)
             .ToListAsync(cancellationToken);

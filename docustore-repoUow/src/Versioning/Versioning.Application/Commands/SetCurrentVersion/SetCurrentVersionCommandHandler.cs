@@ -62,17 +62,24 @@ public class SetCurrentVersionCommandHandler : IRequestHandler<SetCurrentVersion
         var currentVersions = await _unitOfWork.Versions.GetCurrentVersionsForDocumentAsync(request.DocumentId, cancellationToken);
         foreach (var cv in currentVersions)
         {
-            cv.MarkAsNotCurrent();
+            if (cv.Id != version.Id)
+            {
+                cv.MarkAsNotCurrent();
+                _unitOfWork.Versions.Update(cv);
+            }
         }
-        _unitOfWork.Versions.UpdateRange(currentVersions);
 
-        // Set this version as current
-        version.SetAsCurrent(request.UserId);
-        _unitOfWork.Versions.Update(version);
+        var versionToUpdate = await _unitOfWork.Versions.GetByIdAsync(version.Id, cancellationToken);
+        if (versionToUpdate == null)
+        {
+            throw new InvalidOperationException($"Version with ID '{version.Id}' not found");
+        }
+        
+        versionToUpdate.SetAsCurrent(request.UserId);
+        _unitOfWork.Versions.Update(versionToUpdate);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
-        // Update file system marker
         await _fileStorageService.UpdateCurrentVersionMarkerAsync(
             request.DocumentId,
             request.VersionNumber,
@@ -93,16 +100,16 @@ public class SetCurrentVersionCommandHandler : IRequestHandler<SetCurrentVersion
         }
 
         return new VersionDto(
-            Id: version.Id,
-            DocumentId: version.DocumentId,
-            VersionNumber: version.VersionNumber,
-            FileName: version.FileName,
-            FileSizeInBytes: version.FileSizeInBytes,
-            ContentType: version.ContentType,
-            Notes: version.Notes,
-            IsCurrent: version.IsCurrent,
-            CreatedAt: version.CreatedAt,
-            CreatedBy: version.CreatedBy
+            Id: versionToUpdate.Id,
+            DocumentId: versionToUpdate.DocumentId,
+            VersionNumber: versionToUpdate.VersionNumber,
+            FileName: versionToUpdate.FileName,
+            FileSizeInBytes: versionToUpdate.FileSizeInBytes,
+            ContentType: versionToUpdate.ContentType,
+            Notes: versionToUpdate.Notes,
+            IsCurrent: versionToUpdate.IsCurrent,
+            CreatedAt: versionToUpdate.CreatedAt,
+            CreatedBy: versionToUpdate.CreatedBy
         );
     }
 }

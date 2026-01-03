@@ -1,0 +1,7 @@
+Metric,Average,Median,P95,P99,Max
+http_req_duration,5.18,3.00,8.79,N/A,296.30
+document_creation_time,40.16,32.00,38.00,N/A,324.00
+document_retrieval_time,2.24,2.00,3.15,N/A,6.00
+document_update_time,5.16,5.00,6.00,N/A,20.00
+document_deletion_time,4.68,4.00,5.60,N/A,12.00
+document_list_time,1.97,2.00,3.00,N/A,3.00

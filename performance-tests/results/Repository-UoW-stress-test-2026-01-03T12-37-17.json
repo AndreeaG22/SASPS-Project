@@ -1,0 +1,468 @@
+{
+  "root_group": {
+    "groups": [
+      {
+        "name": "setup",
+        "path": "::setup",
+        "id": "5c0f8025f7e0b6654089e5b00e950f1a",
+        "groups": [],
+        "checks": [
+            {
+              "fails": 0,
+              "name": "document created successfully",
+              "path": "::setup::document created successfully",
+              "id": "df38420425889e145d1548882477c8fb",
+              "passes": 100
+            },
+            {
+              "name": "response has document ID",
+              "path": "::setup::response has document ID",
+              "id": "78dfea51cc32202b969ace5225209e64",
+              "passes": 100,
+              "fails": 0
+            }
+          ]
+      }
+    ],
+    "checks": [
+      {
+        "name": "document created successfully",
+        "path": "::document created successfully",
+        "id": "5fbca016a501dd304900e0f97012f6ed",
+        "passes": 251,
+        "fails": 0
+      },
+      {
+        "fails": 0,
+        "name": "response has document ID",
+        "path": "::response has document ID",
+        "id": "e468bc52bffeb03b7500145d14d060d9",
+        "passes": 251
+      },
+      {
+        "fails": 0,
+        "name": "document updated successfully",
+        "path": "::document updated successfully",
+        "id": "e8cc475ecc2a6d4879edacd1173af3f0",
+        "passes": 102
+      },
+      {
+        "passes": 102,
+        "fails": 0,
+        "name": "response has updated data",
+        "path": "::response has updated data",
+        "id": "182af753784619675c241596aa681227"
+      },
+      {
+        "id": "e26ee04321a479f596e9783004df2dc0",
+        "passes": 656,
+        "fails": 0,
+        "name": "document retrieved successfully",
+        "path": "::document retrieved successfully"
+      },
+      {
+        "name": "response has valid structure",
+        "path": "::response has valid structure",
+        "id": "5456b8d37db5fff48b5febf071a63895",
+        "passes": 656,
+        "fails": 0
+      },
+      {
+        "name": "document deleted successfully",
+        "path": "::document deleted successfully",
+        "id": "aba57c46197b4321df4e6616747cbe80",
+        "passes": 44,
+        "fails": 16
+      },
+      {
+        "name": "response confirms deletion",
+        "path": "::response confirms deletion",
+        "id": "d7a43f572398b2d437264b4bf393cf82",
+        "passes": 44,
+        "fails": 16
+      }
+    ],
+    "name": "",
+    "path": "",
+    "id": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "options": {
+    "summaryTrendStats": [
+      "avg",
+      "min",
+      "med",
+      "max",
+      "p(90)",
+      "p(95)"
+    ],
+    "summaryTimeUnit": "",
+    "noColor": false
+  },
+  "state": {
+    "isStdErrTTY": true,
+    "testRunDurationMs": 317033.856637,
+    "isStdOutTTY": true
+  },
+  "metrics": {
+    "http_reqs": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "count": 1170,
+        "rate": 3.690457582073438
+      }
+    },
+    "http_req_duration{expected_response:true}": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "avg": 8.465387699306758,
+        "min": 1.101336,
+        "med": 4.870353,
+        "max": 133.038372,
+        "p(90)": 17.96049530000001,
+        "p(95)": 31.0933678
+      }
+    },
+    "data_received": {
+      "type": "counter",
+      "contains": "data",
+      "values": {
+        "count": 669063,
+        "rate": 2110.3834369528213
+      }
+    },
+    "http_req_tls_handshaking": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "p(95)": 0,
+        "avg": 0,
+        "min": 0,
+        "med": 0,
+        "max": 0,
+        "p(90)": 0
+      }
+    },
+    "iteration_duration": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "med": 2064.198513,
+        "max": 45316.866133,
+        "p(90)": 3088.6483364000005,
+        "p(95)": 8139.6033345999995,
+        "avg": 3262.3364372301226,
+        "min": 747.198324
+      }
+    },
+    "iterations": {
+      "values": {
+        "count": 1069,
+        "rate": 3.371879619860261
+      },
+      "type": "counter",
+      "contains": "default"
+    },
+    "http_req_duration": {
+      "thresholds": {
+        "p(95)<5000": {
+          "ok": true
+        },
+        "p(99)<10000": {
+          "ok": true
+        }
+      },
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "max": 133.038372,
+        "p(90)": 17.855105900000027,
+        "p(95)": 30.772588299999967,
+        "avg": 8.42116167435897,
+        "min": 1.101336,
+        "med": 4.8637875
+      }
+    },
+    "http_req_blocked": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "avg": 0.027612429914529894,
+        "min": 0.006984,
+        "med": 0.01313,
+        "max": 4.727036,
+        "p(90)": 0.02619800000000001,
+        "p(95)": 0.03501889999999998
+      }
+    },
+    "vus": {
+      "type": "gauge",
+      "contains": "default",
+      "values": {
+        "value": 1,
+        "min": 0,
+        "max": 25
+      }
+    },
+    "http_req_sending": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "avg": 0.424233496581197,
+        "min": 0.014387,
+        "med": 0.05301,
+        "max": 31.995595,
+        "p(90)": 0.5865106000000027,
+        "p(95)": 1.767495049999997
+      }
+    },
+    "operation_success_rate": {
+      "type": "rate",
+      "contains": "default",
+      "values": {
+        "rate": 1,
+        "passes": 1069,
+        "fails": 0
+      }
+    },
+    "document_retrieval_time": {
+      "type": "trend",
+      "contains": "default",
+      "values": {
+        "avg": 4.475609756097561,
+        "min": 1,
+        "med": 4,
+        "max": 92,
+        "p(90)": 7,
+        "p(95)": 9
+      }
+    },
+    "http_req_failed": {
+      "type": "rate",
+      "contains": "default",
+      "values": {
+        "rate": 0.013675213675213675,
+        "passes": 16,
+        "fails": 1154
+      },
+      "thresholds": {
+        "rate<0.1": {
+          "ok": true
+        }
+      }
+    },
+    "total_operations": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "count": 1069,
+        "rate": 3.371879619860261
+      }
+    },
+    "http_req_receiving": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "avg": 0.37201803076923073,
+        "min": 0.032825,
+        "med": 0.1087785,
+        "max": 81.957237,
+        "p(90)": 0.2504389000000001,
+        "p(95)": 0.3695718499999999
+      }
+    },
+    "vus_max": {
+      "type": "gauge",
+      "contains": "default",
+      "values": {
+        "value": 25,
+        "min": 25,
+        "max": 25
+      }
+    },
+    "document_update_time": {
+      "values": {
+        "max": 21,
+        "p(90)": 11,
+        "p(95)": 13,
+        "avg": 6.8431372549019605,
+        "min": 3,
+        "med": 6
+      },
+      "type": "trend",
+      "contains": "default"
+    },
+    "document_deletion_time": {
+      "type": "trend",
+      "contains": "default",
+      "values": {
+        "max": 21,
+        "p(90)": 10,
+        "p(95)": 11,
+        "avg": 6.266666666666667,
+        "min": 2,
+        "med": 5.5
+      }
+    },
+    "checks": {
+      "type": "rate",
+      "contains": "default",
+      "values": {
+        "rate": 0.9863130881094953,
+        "passes": 2306,
+        "fails": 32
+      }
+    },
+    "http_req_waiting": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "max": 122.893566,
+        "p(90)": 16.10922340000002,
+        "p(95)": 26.399381049999963,
+        "avg": 7.624910147008547,
+        "min": 1.051819,
+        "med": 4.5577395
+      }
+    },
+    "document_creation_time": {
+      "type": "trend",
+      "contains": "default",
+      "values": {
+        "avg": 5571.434262948207,
+        "min": 9,
+        "med": 349,
+        "max": 43158,
+        "p(90)": 20137,
+        "p(95)": 28782.5
+      }
+    },
+    "data_sent": {
+      "type": "counter",
+      "contains": "data",
+      "values": {
+        "count": 293361146,
+        "rate": 925330.6543089341
+      }
+    },
+    "http_req_connecting": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "avg": 0.007155028205128207,
+        "min": 0,
+        "med": 0,
+        "max": 0.86981,
+        "p(90)": 0,
+        "p(95)": 0
+      }
+    }
+  },
+  "setup_data": {
+    "baseUrl": "http://localhost:8082",
+    "documentIds": [
+      "d7138ba7-1e4b-4cd9-84b9-d38e6bc8e51a",
+      "7c06abb6-1615-40c6-8fd5-c44b19cdd1cb",
+      "35d7f2ad-c317-432c-98b2-e6ecbc5ceb15",
+      "ffd1d1db-3ce5-4956-83c5-3115b4ad756a",
+      "e97b4c63-8d54-463b-bc14-457e31671991",
+      "dc00c9fd-d585-45f3-9e6f-d86bf23afe07",
+      "e3209e4f-c8ed-4531-9a28-39d659e29602",
+      "bd044ee8-9bbf-4cad-ab86-07eab1de3f5b",
+      "dd722e57-5960-4da1-87af-2b71f0a64847",
+      "d7723fb4-9cc0-46ed-bd9e-a9ccdbb278a0",
+      "016359be-2b97-4cb6-99f5-36a22ed99e24",
+      "46cfaf14-1377-4d9c-b782-0d99bf86b1da",
+      "0888af1e-da80-4aa3-99dc-40f26aea6296",
+      "824fd4db-9854-41f3-b12f-f8fbbcd84462",
+      "86c34289-78b4-4703-ba2e-e31b42be154e",
+      "881fd7dc-a558-4c49-ab13-2c82149608e7",
+      "ed109821-f530-470b-b519-6d99cd43216a",
+      "214d7958-b439-4ed9-908c-add557a79095",
+      "bd436156-87b7-44a1-b758-d087bae5923f",
+      "99710e87-d2c0-42c7-b9c6-bf1061d5801e",
+      "4e3768b1-3b81-4c2d-8d8a-ec16b9d92f25",
+      "44b82601-1eed-4c06-922c-f86265dea398",
+      "51d0c460-2b2f-4d63-9f0d-6cf9e40cfac2",
+      "e2db432c-b992-4b3b-86e9-7c91371fc5b2",
+      "b8a84b47-d46f-4ab0-8f00-3da4d20ce3ca",
+      "6ff48eb6-41a2-47d4-8b7a-ef97efe491aa",
+      "59f3858d-4159-4eee-89bd-52775f280ef9",
+      "68fbf3a9-ca82-4cd4-93e5-fe0e81ef9622",
+      "d7ccb864-21e3-4e44-846c-9de20da9c0f1",
+      "ce8ad418-6d0b-4b79-9777-6f04af0932d1",
+      "75fe03c8-3743-4668-b200-61cdff7da2b3",
+      "8d3f626b-350e-4ed7-98de-38262e4e98d9",
+      "5ead4486-53ed-491d-890a-2b546653472a",
+      "247a78c7-4918-471e-80e9-3130ef127be8",
+      "54313e2b-176c-440f-9da2-6a5c127793b2",
+      "b3c88f69-0fea-4178-ac73-d86f49b054aa",
+      "b4aa2d08-e942-477e-912e-e9134807a96d",
+      "e03f2e9f-6e92-4e34-b28f-b326ec82e990",
+      "9362a731-1dbb-4c74-8dd5-2378e77b4e59",
+      "9854e85f-52ed-4a68-b4d9-27a5649d6553",
+      "73fc29c5-876c-4820-ac5e-ad64c6e7894f",
+      "96c2022d-c8e1-4978-8b18-73dda15437f8",
+      "58c25cc1-2ad5-454a-b9bb-02b9be4a768a",
+      "ed526540-0ab7-41a9-9d59-393d96876a4d",
+      "f6b8ffcb-2572-4c2f-80a9-920581788147",
+      "eb008e9a-4e58-44e3-a9d6-bf83935c2baa",
+      "d8ee813b-05e1-45a9-b030-ebaa1ded4037",
+      "b7b41596-73da-4b89-836d-aee18f8f8287",
+      "5942c488-19bd-4bf9-b8f2-8d666be93f3b",
+      "a7d5feb4-079f-4ee8-9e61-41a97e327be7",
+      "c5d73539-c76d-4ee9-9328-901ae163bf96",
+      "a6efd404-acdf-4382-8ce9-7982da5ab11f",
+      "42ea0af1-2f9d-4ae1-93f2-27ee16fa7d59",
+      "f857a1b4-9d8f-401f-ab8c-5bd43125add2",
+      "4c54c255-81be-4e99-b5e9-4951c52ff14a",
+      "591de1e8-b495-47bb-9f6b-f2cbe37e7e09",
+      "fe4c532a-7af3-4f82-9494-fb80ec155296",
+      "3b837a4a-3ec3-4a1a-b998-da7df1a6c961",
+      "a121c4a7-a297-4bea-9430-1daf6c7ac466",
+      "d2e11a4c-f91a-4496-8790-10dd7bf94226",
+      "de10e753-93ea-4373-a36a-b9ea252e851b",
+      "cac8f35f-c43c-4172-852b-30a498ed4f9a",
+      "11eeabac-079d-478b-9adb-70de0f28b804",
+      "0687d675-6a70-4927-8a24-18b48bd8ee10",
+      "a237f9f9-0ff7-4706-8b5b-f4bc4e138f6d",
+      "2e6a42d4-7c12-4aa3-9cb5-296aff7eae1c",
+      "e4dcd566-b4d6-4cac-addf-489d8e2cb831",
+      "1323e648-144f-479e-bb8b-448c1571eb2a",
+      "f97cc11f-1bed-41c0-a89e-cc7f79059246",
+      "fbb8b637-3fc5-4313-bf56-b9486637e8a6",
+      "b37a8903-f7d9-4f63-b464-f1e537bed792",
+      "50952f00-d99b-442c-9f56-ffec5b2ba875",
+      "0f58ada4-5a29-4388-a98f-7307f8dbbabf",
+      "03115603-1b25-4599-8edc-f11d1df78879",
+      "3c5546a3-f2ec-494b-a5bb-400961181936",
+      "5c40ef60-080e-4db3-8b62-912d8ff6fb8e",
+      "1b79b177-5d7b-416e-b14f-842d9b580234",
+      "fa45a74b-bf70-4dc9-ae70-bf44476a5afa",
+      "2f1ce676-3a1b-4a8e-823c-d7ffc2067df4",
+      "94aa1986-aac8-4e9b-bf7e-b1ed73287672",
+      "918a822e-89fe-41de-b682-47558c973e3f",
+      "b67a864b-d807-402a-8733-c768b7efc282",
+      "8633c9b3-8b8b-4e2e-9af7-37d67c16aa6e",
+      "c2e1861c-c039-444d-912c-5ea50db63b3e",
+      "ad2e3599-782b-4e5a-8521-44b50bb3a90a",
+      "7a917bfc-2433-4a47-a497-aef6737c279d",
+      "d0e07123-a9f9-4d7b-978f-5af519858976",
+      "6609eeeb-36be-4e4a-9c3e-bf8b7d633651",
+      "65fb2c14-20b7-4d1c-b93d-cb52436eb69f",
+      "80cec222-41c5-48ed-9386-a7612b9f4bfb",
+      "bc5406ab-4b63-49fa-840c-8173bac874ae",
+      "1d81cacd-11f8-4c1a-b0eb-629722889b14",
+      "5bca2745-6596-4f15-b9df-b3a2339610b4",
+      "e78f4ba9-6898-4533-9e03-74d69f3d1767",
+      "da2ad1e7-df22-438e-be84-c578c6f5bb30",
+      "a2a75146-4489-4e72-a514-c591fd72cdb9",
+      "9e2ef7f4-70e6-45f7-8538-e4113aa0983d",
+      "17103c51-8642-4576-84fa-6ee552cb1e2d",
+      "3f12639e-611a-457c-9135-bb562b94982a",
+      "d1ddc0ea-f865-4b2e-bc0e-d41ce6f8a9e3"
+    ],
+    "targetName": "Repository + UoW"
+  }
+}

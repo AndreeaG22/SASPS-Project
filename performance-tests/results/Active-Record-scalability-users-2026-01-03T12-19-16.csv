@@ -1,0 +1,7 @@
+UserLevel,Average,Median,P90,P95,P99,Max
+5,2014.29,4.00,1284.50,13368.65,undefined,33681.00
+10,1370.20,4.00,388.00,6483.00,undefined,33356.00
+
+Total Requests,818
+Avg Throughput (req/s),2.36
+Error Rate (%),0.37

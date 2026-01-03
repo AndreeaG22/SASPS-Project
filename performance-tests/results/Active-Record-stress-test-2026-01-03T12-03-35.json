@@ -1,0 +1,468 @@
+{
+  "metrics": {
+    "http_req_duration{expected_response:true}": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "avg": 10.355310004077474,
+        "min": 1.241648,
+        "med": 5.793587,
+        "max": 105.622996,
+        "p(90)": 22.138944,
+        "p(95)": 39.503637
+      }
+    },
+    "data_received": {
+      "type": "counter",
+      "contains": "data",
+      "values": {
+        "rate": 1750.5512514903369,
+        "count": 575564
+      }
+    },
+    "iterations": {
+      "values": {
+        "rate": 2.697769422812978,
+        "count": 887
+      },
+      "type": "counter",
+      "contains": "default"
+    },
+    "http_req_tls_handshaking": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "avg": 0,
+        "min": 0,
+        "med": 0,
+        "max": 0,
+        "p(90)": 0,
+        "p(95)": 0
+      }
+    },
+    "checks": {
+      "contains": "default",
+      "values": {
+        "rate": 0.9908998988877654,
+        "passes": 1960,
+        "fails": 18
+      },
+      "type": "rate"
+    },
+    "document_retrieval_time": {
+      "type": "trend",
+      "contains": "default",
+      "values": {
+        "avg": 5.240530303030303,
+        "min": 1,
+        "med": 4,
+        "max": 72,
+        "p(90)": 9,
+        "p(95)": 14
+      }
+    },
+    "vus": {
+      "type": "gauge",
+      "contains": "default",
+      "values": {
+        "value": 2,
+        "min": 0,
+        "max": 25
+      }
+    },
+    "document_creation_time": {
+      "type": "trend",
+      "contains": "default",
+      "values": {
+        "p(90)": 28690.000000000004,
+        "p(95)": 48864.59999999999,
+        "avg": 7799.630136986301,
+        "min": 10,
+        "med": 532,
+        "max": 62348
+      }
+    },
+    "vus_max": {
+      "type": "gauge",
+      "contains": "default",
+      "values": {
+        "value": 25,
+        "min": 25,
+        "max": 25
+      }
+    },
+    "http_req_sending": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "avg": 0.6255594707070704,
+        "min": 0.014318,
+        "med": 0.0553495,
+        "max": 32.775778,
+        "p(90)": 0.7926700000000002,
+        "p(95)": 3.2328792999999996
+      }
+    },
+    "http_req_receiving": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "min": 0.034362,
+        "med": 0.11855650000000001,
+        "max": 63.218349,
+        "p(90)": 0.3263286,
+        "p(95)": 0.7728589499999999,
+        "avg": 0.527036370707071
+      }
+    },
+    "document_deletion_time": {
+      "type": "trend",
+      "contains": "default",
+      "values": {
+        "avg": 6.659090909090909,
+        "min": 2,
+        "med": 6,
+        "max": 13,
+        "p(90)": 10,
+        "p(95)": 12
+      }
+    },
+    "data_sent": {
+      "type": "counter",
+      "contains": "data",
+      "values": {
+        "count": 265111140,
+        "rate": 806323.2549482419
+      }
+    },
+    "http_req_blocked": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "med": 0.012781,
+        "max": 20.188678,
+        "p(90)": 0.027168,
+        "p(95)": 0.037868449999999984,
+        "avg": 0.06742702424242417,
+        "min": 0.006565
+      }
+    },
+    "total_operations": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "count": 887,
+        "rate": 2.697769422812978
+      }
+    },
+    "iteration_duration": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "min": 717.083993,
+        "med": 2030.730485,
+        "max": 63806.131848,
+        "p(90)": 3728.238417199996,
+        "p(95)": 10300.70118019998,
+        "avg": 3736.6915021770014
+      }
+    },
+    "document_update_time": {
+      "type": "trend",
+      "contains": "default",
+      "values": {
+        "avg": 8.673469387755102,
+        "min": 3,
+        "med": 7,
+        "max": 27,
+        "p(90)": 17,
+        "p(95)": 21.299999999999983
+      }
+    },
+    "http_req_connecting": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "p(95)": 0,
+        "avg": 0.045461789898989906,
+        "min": 0,
+        "med": 0,
+        "max": 20.0469,
+        "p(90)": 0
+      }
+    },
+    "http_req_duration": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "max": 105.622996,
+        "p(90)": 21.895495800000006,
+        "p(95)": 39.4984827,
+        "avg": 10.293654316161618,
+        "min": 1.241648,
+        "med": 5.763555
+      },
+      "thresholds": {
+        "p(95)<5000": {
+          "ok": true
+        },
+        "p(99)<10000": {
+          "ok": true
+        }
+      }
+    },
+    "http_reqs": {
+      "type": "counter",
+      "contains": "default",
+      "values": {
+        "count": 990,
+        "rate": 3.011039152857777
+      }
+    },
+    "operation_success_rate": {
+      "type": "rate",
+      "contains": "default",
+      "values": {
+        "rate": 1,
+        "passes": 887,
+        "fails": 0
+      }
+    },
+    "http_req_waiting": {
+      "type": "trend",
+      "contains": "time",
+      "values": {
+        "avg": 9.141058474747481,
+        "min": 1.168733,
+        "med": 5.3108059999999995,
+        "max": 89.801106,
+        "p(90)": 19.7912581,
+        "p(95)": 31.714646349999995
+      }
+    },
+    "http_req_failed": {
+      "contains": "default",
+      "values": {
+        "fails": 981,
+        "rate": 0.00909090909090909,
+        "passes": 9
+      },
+      "thresholds": {
+        "rate<0.1": {
+          "ok": true
+        }
+      },
+      "type": "rate"
+    }
+  },
+  "setup_data": {
+    "baseUrl": "http://localhost:8080",
+    "documentIds": [
+      "d0c724d8-d1b2-4073-a3ce-d0ff7811abb0",
+      "81cd9d25-edea-4af5-b119-2d3100014e23",
+      "ef553382-6f1f-4fe5-933d-39f64854ddab",
+      "c0c6b8ce-05e2-4be5-bdd5-30275943f1de",
+      "fb4a717b-5b7c-4928-840c-e556245c7716",
+      "5be8816c-ac24-4635-849d-a4177f2df5f5",
+      "6067c41c-cdc5-4aa4-8d50-620bbd914e4f",
+      "0f22c1f8-8703-44f8-9754-6ec8c7687b24",
+      "64632425-9e15-40de-a2c4-a55d86fe1c29",
+      "600e89b3-7c11-4f1e-9b88-d45b7b6c3ba4",
+      "8ca4d468-5643-4dc4-91d6-0dbae5fa00f4",
+      "1f6b0d3d-bd53-4985-84c5-a1e4214dde7e",
+      "7736b85a-04ea-4c63-94e8-439be3dc2c86",
+      "8ade5a54-be06-426d-a0ff-37dd13dead14",
+      "0cf894b9-914f-4d4a-b206-0589bc507a6f",
+      "7d6ed5f1-1941-4b4c-942f-0db862581847",
+      "d59f8db1-eff0-4c49-b5c3-bae7c0866516",
+      "512679e4-4a5b-405f-878c-08115219c172",
+      "92cfcda2-b6ac-490a-abdd-49a22054f73d",
+      "aa66c782-ccbb-40c7-ab72-56da10c0da43",
+      "1b55ca12-821e-4be4-9f61-4b05ba0efd9e",
+      "70f5a0a3-1150-4d72-8c4e-c465af9003c8",
+      "0681e2ee-ee55-4fd7-8ccd-a392190ff0fe",
+      "0f067a68-fd60-499a-aab9-52860fa8be87",
+      "646ffc4f-9478-42ce-bf60-ff625878ced6",
+      "28c00005-8e3e-43d1-8483-879636510871",
+      "7ea583d3-e87e-4030-a5d0-308e785e48ac",
+      "33699e36-4a72-45d9-9231-98ff8340fa05",
+      "4a809cf1-1333-4964-bb19-bbfbe12b026d",
+      "0a7ae612-b695-41da-80e6-89b428f12553",
+      "0007c632-9ded-4269-9303-da2fda1b6957",
+      "87fe6a42-fbfe-441c-912c-ceed5bc82a22",
+      "f27e4fba-c25a-4964-b760-6058fdec19d4",
+      "cff9047d-964a-4d77-b2f7-f43c44584fb9",
+      "daf92aec-7915-4ca5-85af-b2ac7f6ffff9",
+      "31fae37e-a77c-4a27-8197-1e1882fd2b6b",
+      "36811755-fce9-46ff-9079-86bb8b3ad61b",
+      "205cb581-0e47-44e8-bb9a-6d6db64ed8c2",
+      "c148e5e9-facb-45f5-8417-f16198c5d40b",
+      "965bf73e-8e8f-490a-b474-1ee711fa6089",
+      "8cefa9fc-da43-438d-b269-effcc1cd5f98",
+      "cff247af-4d15-484c-b9d4-b7b712263b98",
+      "48e4d31d-adbd-4413-9f9f-37c01e64b6e2",
+      "5ad150dc-caee-4592-b975-0473ba173677",
+      "51a83624-53e6-4aee-aa3f-70236aa184af",
+      "39213227-f63d-49d1-a4d9-8b0aba7d71c6",
+      "00ed987a-6ca9-4a88-8a11-11cba6f2cad3",
+      "8aef765d-61a5-413d-92c6-62d78b00d071",
+      "3e46ca3a-3a62-45b3-bf7b-dbe0b131a194",
+      "ab81c1ba-5d6a-4500-8881-3168314014ed",
+      "cfabd57f-e282-4cb9-a51e-6e8b411aa11e",
+      "f4ee1d17-433f-4c31-911c-8fd14b818093",
+      "720301a0-30d1-472c-be14-44ca30a95a30",
+      "a67388d8-60eb-4e1f-b681-4fa24565106b",
+      "94153713-e35c-4b90-b4af-039589092f48",
+      "dbc88453-138a-4499-a9da-60f43a1d56ac",
+      "7e1db536-46c9-4ed9-9860-ffd7a27a2646",
+      "e774951e-07c9-452a-969c-c05147da50c3",
+      "ae9268f7-4813-47db-a52c-4fe4325d1757",
+      "fe8007d1-4612-4dd1-8380-ca712153127c",
+      "014ce7df-d1ee-4fde-a9ff-91493bb83b03",
+      "cef5ce83-d604-4354-a8c5-6e15d239ad51",
+      "ec602029-cb5f-4c3b-bcdd-69c5c17d4411",
+      "eb0f4c81-66bc-4a8e-a735-85f72cc3217c",
+      "4f95840a-38bd-4217-ba23-709c18b1dfd8",
+      "529903f1-19d9-409d-84de-5117182e1560",
+      "a833b88b-eac6-4ae7-9017-17512c11812e",
+      "e0a6eae0-b229-4f54-8750-f08d292aa5d5",
+      "0fac7f53-b9b4-4b39-9b3e-1cc1f2fb308e",
+      "020e99c6-67ef-401e-9b58-c1b3b00cc017",
+      "57da4666-08fe-42ad-b360-3a47dfa9ac44",
+      "85be5acb-1e38-465a-97db-0f6090e18bf3",
+      "8ac94f0b-ac18-40a8-8472-70547b235f94",
+      "28dee3ac-d4ca-497a-9e9e-5760d965a04c",
+      "d90f7235-3e76-4ae3-b1a0-3c0c97db9b7c",
+      "e6de0f86-6a20-4e0f-8a50-5eb09f3fc1a3",
+      "0aa3b19f-318d-45ae-96c2-226b455af011",
+      "a18af895-fc57-46ce-82d7-9486910bf412",
+      "c1b53784-58f3-4d27-ab83-a7767f60115b",
+      "d4d28e04-d4b1-42ee-a232-e6156d463801",
+      "b42a3b11-7e06-48c4-aa04-dfd9841c9596",
+      "678aba27-dcc3-4e10-8744-619d69183375",
+      "26cd3d47-c4b6-4c4e-bc6f-25484595033e",
+      "ba28ec94-c4a4-4ff9-9ea1-0ae8aca09a7c",
+      "6e5495b0-189f-40b4-a874-a2267421d085",
+      "01d3cc5e-c107-4bcd-8964-3738dd9353ac",
+      "ea9762d3-6f32-4f3f-8ce4-aebc6e2c5746",
+      "393eb136-9fd2-4ec8-9ce1-651495230156",
+      "195ece96-ddd8-4009-b361-78e59663241a",
+      "8d7cbd83-bf4e-4864-8410-8f7cabb13a71",
+      "443e2011-9b6e-4a52-ad27-6ad768341150",
+      "7331d18d-e284-414b-bc23-dd09ffbee19d",
+      "6e4286c2-a197-41c8-b5af-8f95460552ee",
+      "616781e1-8802-478d-8d4d-3497595ff8f9",
+      "adb1214c-5aaf-42d3-a67a-7600a6899698",
+      "e4358e0d-365b-4c4e-9feb-006315ecee3b",
+      "a660942c-40ef-46df-bfa2-038c52b2afb0",
+      "00c7b763-9761-43d5-bf0b-c02f090b0d8d",
+      "bde51b00-b61e-4561-be57-6c89003d7472",
+      "98a3d7c4-6f16-4e15-9580-ddaf9a525521"
+    ],
+    "targetName": "Active Record"
+  },
+  "root_group": {
+    "name": "",
+    "path": "",
+    "id": "d41d8cd98f00b204e9800998ecf8427e",
+    "groups": [
+      {
+        "checks": [
+          {
+            "name": "document created successfully",
+            "path": "::setup::document created successfully",
+            "id": "df38420425889e145d1548882477c8fb",
+            "passes": 100,
+            "fails": 0
+          },
+          {
+            "fails": 0,
+            "name": "response has document ID",
+            "path": "::setup::response has document ID",
+            "id": "78dfea51cc32202b969ace5225209e64",
+            "passes": 100
+          }
+        ],
+        "name": "setup",
+        "path": "::setup",
+        "id": "5c0f8025f7e0b6654089e5b00e950f1a",
+        "groups": []
+      }
+    ],
+    "checks": [
+      {
+        "name": "document retrieved successfully",
+        "path": "::document retrieved successfully",
+        "id": "e26ee04321a479f596e9783004df2dc0",
+        "passes": 528,
+        "fails": 0
+      },
+      {
+        "path": "::response has valid structure",
+        "id": "5456b8d37db5fff48b5febf071a63895",
+        "passes": 528,
+        "fails": 0,
+        "name": "response has valid structure"
+      },
+      {
+        "id": "e8cc475ecc2a6d4879edacd1173af3f0",
+        "passes": 98,
+        "fails": 0,
+        "name": "document updated successfully",
+        "path": "::document updated successfully"
+      },
+      {
+        "path": "::response has updated data",
+        "id": "182af753784619675c241596aa681227",
+        "passes": 98,
+        "fails": 0,
+        "name": "response has updated data"
+      },
+      {
+        "name": "document created successfully",
+        "path": "::document created successfully",
+        "id": "5fbca016a501dd304900e0f97012f6ed",
+        "passes": 219,
+        "fails": 0
+      },
+      {
+        "name": "response has document ID",
+        "path": "::response has document ID",
+        "id": "e468bc52bffeb03b7500145d14d060d9",
+        "passes": 219,
+        "fails": 0
+      },
+      {
+        "name": "document deleted successfully",
+        "path": "::document deleted successfully",
+        "id": "aba57c46197b4321df4e6616747cbe80",
+        "passes": 35,
+        "fails": 9
+      },
+      {
+        "name": "response confirms deletion",
+        "path": "::response confirms deletion",
+        "id": "d7a43f572398b2d437264b4bf393cf82",
+        "passes": 35,
+        "fails": 9
+      }
+    ]
+  },
+  "options": {
+    "summaryTrendStats": [
+      "avg",
+      "min",
+      "med",
+      "max",
+      "p(90)",
+      "p(95)"
+    ],
+    "summaryTimeUnit": "",
+    "noColor": false
+  },
+  "state": {
+    "isStdErrTTY": true,
+    "testRunDurationMs": 328790.14511,
+    "isStdOutTTY": true
+  }
+}

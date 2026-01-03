@@ -1,0 +1,3 @@
+Phase,DocumentCount,Operation,Average,Median,P95,P99,Max
+Phase 100,100,Read,2.41,2.00,3.00,undefined,10.00
+Phase 100,100,List,17.12,17.00,19.60,undefined,37.00

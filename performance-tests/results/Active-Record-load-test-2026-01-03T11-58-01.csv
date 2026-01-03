@@ -1,0 +1,10 @@
+Metric,Average,Median,P90,P95,P99,Max,Count,Rate
+http_req_duration,6.16,3.96,11.11,19.49,N/A,61.02,N/A,N/A
+document_creation_time,4781.00,308.50,19371.50,22418.25,N/A,24140.00,N/A,N/A
+document_retrieval_time,2.59,2.00,4.00,5.00,N/A,15.00,N/A,N/A
+document_update_time,5.47,5.00,7.10,8.00,N/A,9.00,N/A,N/A
+document_deletion_time,5.04,5.00,7.00,7.90,N/A,8.00,N/A,N/A
+
+Total Requests,503
+Throughput (req/s),2.65
+Error Rate (%),0.80

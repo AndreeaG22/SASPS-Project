@@ -1,0 +1,7 @@
+Metric,Value
+Write_Avg_ms,6166.52
+Write_P95_ms,35113.10
+Write_P99_ms,undefined
+Total_Writes,190
+Create_Success_Rate,100.00
+Error_Rate,0.00

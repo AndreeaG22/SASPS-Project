@@ -106,6 +106,42 @@ services:
     volumes:
       - document_storage_repo:/app/DocumentStorage
 
+  # InfluxDB for k6 metrics storage
+  influxdb:
+    image: influxdb:1.8-alpine
+    container_name: docustore-influxdb
+    environment:
+      INFLUXDB_DB: k6
+      INFLUXDB_HTTP_AUTH_ENABLED: "false"
+    ports:
+      - "8086:8086"
+    volumes:
+      - influxdb_data:/var/lib/influxdb
+    networks:
+      - docustore-network
+    restart: unless-stopped
+
+  # Grafana for performance metrics visualization
+  grafana:
+    image: grafana/grafana:latest
+    container_name: docustore-grafana
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Viewer
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./performance-tests/grafana/provisioning:/etc/grafana/provisioning
+      - ./performance-tests/grafana/dashboards:/var/lib/grafana/dashboards
+    depends_on:
+      - influxdb
+    networks:
+      - docustore-network
+    restart: unless-stopped
+
 
 # Named volumes (persistent storage)
 volumes:
@@ -119,6 +155,10 @@ volumes:
     name: docustore_document_storage
   document_storage_repo:
     name: docustore_document_storage_repo
+  influxdb_data:
+    name: docustore_influxdb_data
+  grafana_data:
+    name: docustore_grafana_data
 
 networks:
   docustore-network:

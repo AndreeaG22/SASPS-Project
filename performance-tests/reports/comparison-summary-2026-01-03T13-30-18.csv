@@ -1,0 +1,11 @@
+Scenario,Metric,ActiveRecord,Repository,Difference(%),Winner
+Smoke,AvgResponseTime,5.18,4.95,-4.41,Repository
+Smoke,Throughput,3.80,3.80,0.08,Repository
+Load,AvgResponseTime,6.16,6.45,4.77,Active Record
+Load,Throughput,2.65,2.50,-5.47,Active Record
+Stress,AvgResponseTime,10.29,8.42,-18.19,Repository
+Stress,Throughput,3.01,3.69,22.56,Repository
+ScalabilityData,AvgResponseTime,3.70,3.88,4.71,Active Record
+ScalabilityData,Throughput,4.67,4.75,1.78,Repository
+ScalabilityUsers,AvgResponseTime,8.08,8.40,3.93,Active Record
+ScalabilityUsers,Throughput,2.36,2.30,-2.66,Active Record

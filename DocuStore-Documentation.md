@@ -44,9 +44,7 @@ O privire de ansamblu peste cele doua implementari pentru solutia DocuStore care
   - `GET /api/search/documents` — cautare dupa cuvinte cheie/data/creator cu paginare si sortare
   - `POST /api/search/reindex` — rebuilduieste indexul de cautare pentru toate documentele
 
-- **Design REST:**
-  - URI-urile sunt orientate pe resurse, verbele HTTP si administrarea erorilor sunt consistente in ambele implementari
-  - Listarea documentelor nu are paginare built-in, ceea ce poate limita scalabilitatea fata de endpoint-ul de search
+- **REST API Design:**
   - Controller-ele sunt exprimate ca minimal APIs; Repository+UoW tine compozitia strict in host builder, pe cand Active Record porneste si service locators
 
 ## 3. Pattern-uri Folosite
@@ -224,7 +222,7 @@ Active Record castiga la unele cifre de latenta sub sarcina normala, dar Reposit
 
 - **Active Record**
   - Flow simplu (entitatile isi administreaza singure salvarea), mai putine straturi de inteles, latenta putin mai mica in unele rulari
-  - Legare stansa la EF si service locator, mai greu de testat unitar, consistenta evenimentelor depinde de starea implicita a DbContext, modificarile de scalare risca editari transversale
+  - Cuplare stansa la EF si service locator, mai greu de testat unitar, consistenta evenimentelor depinde de starea implicita a DbContext, modificarile de scalare risca editari transversale
 
 - **Repository + Unit of Work**
   - Separarea responsabilitatilor, testabilitate inalta, limite de tranzactie mai clare, repositories centralizeaza interogarile. Potrivit pentru cerinte in evolutie

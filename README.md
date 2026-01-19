@@ -102,11 +102,8 @@ O privire de ansamblu peste cele doua implementari pentru solutia DocuStore care
 - Integrare event-driven (ex. `DocumentCreatedEvent` alimenteaza versioning/indexing) incurajeaza decuplarea intre module
 - Varianta Repository+UoW separa curat responsabilitatile si e foarte usor de testat (teste pure de domain, infrastructura mockata)
 
-**Discutabile:**
+**Discutabil:**
 - Service locator-ul din Active Record si accesul static la DbContext pun dependente ascunse si fac testarea unitara grea; salvarea si regulile de business sunt impreuna
-- Lipsa paginarii pe endpoint-urile de listare documente ar putea afecta performanta la scara mare
-- Publicarea evenimentelor nu e invelita intr-o tranzactie in nicio varianta; esuari dupa scrieri in baza de date pot lasa modulele downstream inconsistente
-- Warning-uri de versiuni de pachete in infrastructura Repository (EF vs Npgsql release candidate) ar putea deveni o problema de mentenanta daca raman nerezolvate
 
 ## 6. Strategia de Testare
 
